@@ -34,7 +34,7 @@ pair是将2个数据组合成一组数据，pair类型定义在头文件#include
 class Solution {
 public:
     int maxDistance(vector<vector<int>>& grid) {
-        vector<vector<int>> directions = {{-1, 0}, {1, 0}, {0, 1}, {0, -1}}; //定义一个方向向量
+        vector<vector<int>> directions = { {-1, 0}, {1, 0}, {0, 1}, {0, -1} }; //定义一个方向向量
         const int N = grid.size();
         // 使用deque作为队列
         deque<pair<int, int>> deq;
