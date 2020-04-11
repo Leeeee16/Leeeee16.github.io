@@ -4,7 +4,9 @@
 
 {{< typeit >}}
 **樂 樂 的 学 习 blog ... Orz...**
-{{< /typeit >}}
+{{< /typeit >}}  
+  
+  
 ![](/images/about.gif)
 
 
