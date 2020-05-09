@@ -28,9 +28,9 @@ public:
 牛顿迭代法可以快速求出函数零点。  
 比如题目要求 $ \\sqrt{x} $，我们可以看成求 $ \\ y = f(x)=x^2-C$ 的零点。  
 牛顿迭代我的理解就是，选取初始点$ \\ x_0 $,那么$ \\ x_1 $就是 f(x) 过($ \\ x_0 $，$ f(x_0) $)的切线与x轴的交点，如图所示。不断迭代下去，就能逼近f(x)的零点。  
-牛顿迭代法的地推公式：$$ \\ X_{n+1}=X_n-\frac{f\left(x_n\right)}{f^'\left(x_n\right)}$$
+牛顿迭代法的地推公式：$$ \\ x_{n+1}=x_n-\frac{f\left(x_n\right)}{f^'\left(x_n\right)}$$
   
-本题中带入化简后得到的递推是为：$$ \\ X_i=\frac12\left(X_i+\frac c{x_i}\right)$$
+本题中带入化简后得到的递推是为：$$ \\ x_{i+1}=\frac12\left(x_i+\frac c{x_i}\right)$$
   
 ![](/images/niudundiedaifa.PNG)
   
