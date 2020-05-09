@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>LeetCode1162.地图分析-随笔 | 樂樂阿</title>
+        <meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="LeetCode1162.地图分析-随笔" />
+<meta property="og:description" content="题目:1162.地图分析 你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Leeeee16.github.io/posts/leetcode1162/" />
+<meta property="article:published_time" content="2020-03-29T12:38:32+08:00" />
+<meta property="article:modified_time" content="2020-03-29T12:38:32+08:00" /><meta property="og:site_name" content="樂樂阿" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="LeetCode1162.地图分析-随笔"/>
+<meta name="twitter:description" content="题目:1162.地图分析 你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海"/>
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#da532c">
+<link rel="canonical" href="https://Leeeee16.github.io/posts/leetcode1162/" />
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="prev" href="https://Leeeee16.github.io/posts/04-%E4%B8%80%E4%BA%9B%E5%A4%9A%E8%BF%9B%E7%A8%8B/" /><link rel="next" href="https://Leeeee16.github.io/posts/05-%E4%B8%80%E4%BA%9Brequests/" /><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"><link rel="stylesheet" href="/lib/animate/animate.min.css"><link rel="stylesheet" href="/css/style.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "LeetCode1162.地图分析-随笔",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Leeeee16.github.io\/posts\/leetcode1162\/"
+        },"image": {
+                "@type": "ImageObject",
+                "url": "https:\/\/Leeeee16.github.io\/cover.png",
+                "width":  800 ,
+                "height":  600 
+            },"genre": "posts","keywords": "LeetCode, 算法","wordcount":  895 ,
+        "url": "https:\/\/Leeeee16.github.io\/posts\/leetcode1162\/","datePublished": "2020-03-29","dateModified": "2020-03-29","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+                "@type": "Organization",
+                "name": "xxxx",
+                "logo": {
+                "@type": "ImageObject",
+                "url": "https:\/\/Leeeee16.github.io\/logo.png",
+                "width":  127 ,
+                "height":  40 
+                }
+            },"author": {
+                "@type": "Person",
+                "name": "lele"
+            },"description": ""
+    }
+    </script></head>
+    <body><script>
+            if (!window.localStorage || !window.localStorage.getItem('theme')) {window.isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;} else {
+                window.isDark = (window.localStorage && window.localStorage.getItem('theme')) === 'dark';
+            }
+            window.isDark && document.body.classList.add('dark-theme');
+        </script><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/">樂樂阿</a>
+        </div>
+        <div class="menu"><a class="menu-item" href="/posts/" rel="noopener noreffer">所有文章</a><a class="menu-item" href="/tags/" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" rel="noopener noreffer">分类</a><a class="menu-item" href="/about/" rel="noopener noreffer">关于</a><a class="menu-item" href="https://github.com/Leeeee16" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><span class="menu-item">|</span>
+            <a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-wrapper">
+        <div class="header-container">
+            <div class="header-title">
+                <a href="/">樂樂阿</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><a class="menu-item" href="/posts/" title="" rel="noopener noreffer">所有文章</a><a class="menu-item" href="/tags/" title="" rel="noopener noreffer">标签</a><a class="menu-item" href="/categories/" title="" rel="noopener noreffer">分类</a><a class="menu-item" href="/about/" title="" rel="noopener noreffer">关于</a><a class="menu-item" href="https://github.com/Leeeee16" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+
+<script>
+    window.desktopHeaderMode = "fixed";
+    window.mobileHeaderMode = "auto";
+</script>
+<main class="main">
+                <div class="container"><article class="page single"><h1 class="single-title animated flipInX">LeetCode1162.地图分析-随笔</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel="noopener noreffer author" class="author"><i class="fas fa-user-circle fa-fw"></i>lele</a>
+</span>&nbsp;
+                    <span class="post-category">收录于<a href="/categories/%E5%AD%A6%E4%B9%A0%E9%9A%8F%E7%AC%94">
+                                <i class="far fa-folder fa-fw"></i>学习随笔
+                            </a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i><time datetime=2020-03-29>2020-03-29</time>&nbsp;
+                <i class="fas fa-pencil-alt fa-fw"></i>约 895 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>预计阅读 2 分钟&nbsp;<span id="/posts/leetcode1162/" class="leancloud_visitors" data-flag-title="LeetCode1162.地图分析-随笔">
+                        <i class="far fa-eye fa-fw"></i><span class=leancloud-visitors-count></span>&nbsp;次阅读
+                    </span>&nbsp;</div>
+        </div><div class="content" id="content"><ul>
+<li>题目:<a href="https://leetcode-cn.com/problems/as-far-from-land-as-possible/" target="_blank" rel="noopener noreffer">1162.地图分析</a>
+<br>
+你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海洋，1 代表陆地，你知道距离陆地区域最远的海洋区域是是哪一个吗？请返回该海洋区域到离它最近的陆地区域的距离。<br>
+我们这里说的距离是『曼哈顿距离』（ Manhattan Distance）：(x0, y0) 和 (x1, y1) 这两个区域之间的距离是 |x0 - x1| + |y0 - y1| 。<br>
+如果我们的地图上只有陆地或者海洋，请返回 -1。
+<details class="admonition example">
+            <summary class="admonition-title">
+                <i class="icon fas fa-list-ol"></i>示例：<i class="details fas fa-angle-down"></i>
+            </summary>
+            <div class="admonition-content"><ul>
+<li>示例 1：<br>
+[[1,0,1],<br>
+[0,0,0],<br>
+[1,0,1]]<br>
+输出：2（海洋区域（1,1）和所有陆地区域之间的距离最大，最大距离为2）</li>
+<li>示例 2：<br>
+[[1,0,0],<br>
+[0,0,0],<br>
+[0,0,0]]<br>
+输出：4（海洋区域 (2, 2) 和所有陆地区域之间的距离都达到最大，最大距离为 4。）</li>
+</ul></div>
+        </details>
+<details class="admonition tip">
+            <summary class="admonition-title">
+                <i class="icon fas fa-lightbulb"></i>提示:<i class="details fas fa-angle-down"></i>
+            </summary>
+            <div class="admonition-content"><ol>
+<li>1 &lt;= grid.length == grid[0].length &lt;= 100</li>
+<li>grid[i][j]不是0就是1</li>
+</ol></div>
+        </details></li>
+</ul>
+<hr>
+<p>思路：采用多源BFS求最短路。</p>
+<ul>
+<li>note：<br>
+本题可以采用c++中的deque作为队列。
+<code>deque&lt;pair&lt;int, int&gt;&gt; deq;</code><br>
+deque（双端队列），可以方便地在队列首尾进行操作。<br>
+pair是将2个数据组合成一组数据，pair类型定义在头文件#include&lt;utility&gt;中。<br>
+两个值可以分别用pair的两个公有函数<strong>first</strong>和<strong>second</strong>访问。</li>
+</ul>
+<hr>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="kt">int</span> <span class="n">maxDistance</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;&amp;</span> <span class="n">grid</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">directions</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span> <span class="p">};</span> <span class="c1">//定义一个方向向量
+</span><span class="c1"></span>        <span class="k">const</span> <span class="kt">int</span> <span class="n">N</span> <span class="o">=</span> <span class="n">grid</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+        <span class="c1">// 使用deque作为队列
+</span><span class="c1"></span>        <span class="n">deque</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">deq</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">N</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">])</span>    <span class="n">deq</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">});</span><span class="c1">// 所有陆地入队
+</span><span class="c1"></span>            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="c1">// 如果全是陆地 或者 海洋，则返回-1
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">deq</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">deq</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="n">N</span> <span class="o">*</span> <span class="n">N</span><span class="p">)</span>    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">distance</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span>
+        <span class="c1">// 对队列的元素进行遍历
+</span><span class="c1"></span>        <span class="k">while</span> <span class="p">(</span><span class="n">deq</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">distance</span> <span class="o">++</span><span class="p">;</span>    <span class="c1">//每遍历一次，distance + 1
+</span><span class="c1"></span>            <span class="c1">// 当前层的元素有多少，在该轮中一次性遍历完当前层
+</span><span class="c1"></span>            <span class="kt">int</span> <span class="n">size</span> <span class="o">=</span> <span class="n">deq</span><span class="p">.</span><span class="n">size</span><span class="p">();</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">size</span> <span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+                <span class="c1">// BFS遍历的当前元素永远是队列的开头元素
+</span><span class="c1"></span>                <span class="k">auto</span> <span class="n">cur</span> <span class="o">=</span> <span class="n">deq</span><span class="p">.</span><span class="n">front</span><span class="p">();</span> <span class="n">deq</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
+                <span class="c1">// 对当前元素的各个方向进行搜索
+</span><span class="c1"></span>                <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">d</span> <span class="p">:</span> <span class="n">directions</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="n">first</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+                    <span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="n">cur</span><span class="p">.</span><span class="n">second</span> <span class="o">+</span> <span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">];</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">x</span> <span class="o">&gt;=</span> <span class="n">N</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="o">||</span> <span class="n">y</span> <span class="o">&gt;=</span> <span class="n">N</span> <span class="o">||</span> <span class="n">grid</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="k">continue</span><span class="p">;</span>   <span class="c1">//判断是否超出边界或者已经搜索过
+</span><span class="c1"></span>                    <span class="p">}</span>
+                    <span class="n">grid</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>           <span class="c1">// 把grid中搜索过的元素设置为2
+</span><span class="c1"></span>                    <span class="n">deq</span><span class="p">.</span><span class="n">push_back</span><span class="p">({</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">});</span>    <span class="c1">// 入队
+</span><span class="c1"></span>                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="n">distance</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>参考链接：<a href="https://blog.csdn.net/fuxuemingzhu/article/details/105175455" target="_blank" rel="noopener noreffer">https://blog.csdn.net/fuxuemingzhu/article/details/105175455</a>
+</p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>本文于 2020-03-29 更新</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://Leeeee16.github.io/posts/leetcode1162/" data-title="LeetCode1162.地图分析-随笔" data-via="xxxx" data-hashtags="LeetCode,算法"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://Leeeee16.github.io/posts/leetcode1162/" data-hashtag="LeetCode"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://Leeeee16.github.io/posts/leetcode1162/" data-title="LeetCode1162.地图分析-随笔" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a><a href="javascript:void(0);" title="分享到 人人" data-sharer="renren" data-url="https://Leeeee16.github.io/posts/leetcode1162/"><i class="fab fa-renren fa-fw"></i></a><a href="javascript:void(0);" title="分享到 百度" data-sharer="baidu" data-url="https://Leeeee16.github.io/posts/leetcode1162/" data-title="LeetCode1162.地图分析-随笔"><i class="loveit it-baidu-fill"></i></a><a href="javascript:void(0);" title="分享到 Evernote" data-sharer="evernote" data-url="https://Leeeee16.github.io/posts/leetcode1162/" data-title="LeetCode1162.地图分析-随笔"><i class="fab fa-evernote fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/leetcode">LeetCode</a>,&nbsp;<a href="/tags/%E7%AE%97%E6%B3%95">算法</a></section>
+        <section>
+            <span><a href="javascript:window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/posts/04-%E4%B8%80%E4%BA%9B%E5%A4%9A%E8%BF%9B%E7%A8%8B/" class="prev" rel="prev" title="04-一些多进程"><i class="fas fa-angle-left fa-fw"></i>04-一些多进程</a>
+            <a href="/posts/05-%E4%B8%80%E4%BA%9Brequests/" class="next" rel="next" title="05-一些Requests">05-一些Requests<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+<div class="comment"><div id="valine"></div><script>
+            document.addEventListener("DOMContentLoaded", function(event) {
+                new Valine({
+                    el: '#valine',
+                    appId: 'j9d51yKQVAKFqvWcBPhO6SDF-gzGzoHsz',
+                    appKey: 'N9WI37aPuAWDnEKDrRvhi7MX',placeholder: '你的评论 ...',avatar: 'mp',pageSize: 10,lang: 'zh-cn',visitor: true,recordIP: true,});
+            });
+        </script>
+        <noscript>
+            Please enable JavaScript to view the <a href="https://valine.js.org/">comments powered by Valine.</a>
+        </noscript></div>
+    </article></div>
+            </main><footer class="footer">
+    <div class="copyright"><div class="copyright-line">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreffer">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="external nofollow noopener noreffer"><i class="far fa-heart fa-fw"></i> LoveIt</a>
+        </div>
+
+        <div class="copyright-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">lele</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+    </div>
+</footer>
+</div><a href="#" class="dynamic-to-top animated faster" id="dynamic-to-top">
+            <i class="fas fa-chevron-up fa-fw"></i>
+        </a><script>
+        document.addEventListener('DOMContentLoaded', function () {
+            lightGallery(document.getElementById('content'), {
+                selector: '.lightgallery',
+                speed: 400,
+                hideBarsDelay: 2000,
+                thumbnail: true,
+                exThumbImage: 'data-thumbnail',
+                thumbWidth: 80,
+                thumbContHeight: 80,
+            });
+        });
+    </script><link rel="stylesheet" href="/lib/valine/valine.css"><link rel="stylesheet" href="/lib/iconfont/iconfont.min.css"><link rel="stylesheet" href="/lib/lightgallery/lightgallery.min.css"><script src="/lib/valine/Valine.min.js"></script><script src="/lib/smooth-scroll/smooth-scroll.polyfills.min.js"></script><script src="/lib/sharer/sharer.min.js"></script><script src="/lib/lazysizes/lazysizes.min.js"></script><script src="/lib/lightgallery/lightgallery.min.js"></script><script src="/lib/lightgallery/lg-thumbnail.min.js"></script><script src="/lib/lightgallery/lg-zoom.min.js"></script><script src="/js/theme.min.js"></script></body>
+</html>
