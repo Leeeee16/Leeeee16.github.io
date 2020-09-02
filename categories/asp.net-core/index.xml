@@ -5,10 +5,10 @@
         <description>ASP.NET Core - 分类 - 樂樂阿</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 11 Jun 2020 23:51:07 &#43;0800</lastBuildDate><atom:link href="https://Leeeee16.github.io/categories/asp.net-core/" rel="self" type="application/rss+xml" /><item>
     <title>ASP.NET Core 随笔</title>
-    <link>https://Leeeee16.github.io/netcore%E9%9A%8F%E7%AC%94/</link>
+    <link>https://Leeeee16.github.io/2020/06/netcore%E9%9A%8F%E7%AC%94/</link>
     <pubDate>Thu, 11 Jun 2020 23:51:07 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://Leeeee16.github.io/netcore%E9%9A%8F%E7%AC%94/</guid>
+    <guid>https://Leeeee16.github.io/2020/06/netcore%E9%9A%8F%E7%AC%94/</guid>
     <description><![CDATA[Singleton、Transient和Scoped Singlenton：在整个web项目的生命周期里，只会出现一个web实例。 Transient: 每次有其他]]></description>
 </item></channel>
 </rss>

@@ -5,10 +5,10 @@
         <description>C# - 分类 - 樂樂阿</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 03 Jun 2020 22:56:00 &#43;0800</lastBuildDate><atom:link href="https://Leeeee16.github.io/categories/c#/" rel="self" type="application/rss+xml" /><item>
     <title>C-sharp随笔</title>
-    <link>https://Leeeee16.github.io/c-sharp%E7%AC%94%E8%AE%B0/</link>
+    <link>https://Leeeee16.github.io/2020/06/c-sharp%E7%AC%94%E8%AE%B0/</link>
     <pubDate>Wed, 03 Jun 2020 22:56:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://Leeeee16.github.io/c-sharp%E7%AC%94%E8%AE%B0/</guid>
+    <guid>https://Leeeee16.github.io/2020/06/c-sharp%E7%AC%94%E8%AE%B0/</guid>
     <description><![CDATA[out 如果在一个方法中想返回多个相同类型的值，可以考虑返回一个数组。 如果返回多个不同类型的值，数组就不能用了，可以考虑用out参数。 注意:首先在]]></description>
 </item></channel>
 </rss>
