@@ -1,0 +1,21 @@
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>基础理论知识 - 标签 - 樂樂阿</title>
+        <link>https://Leeeee16.github.io/tags/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/</link>
+        <description>基础理论知识 - 标签 - 樂樂阿</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 29 Mar 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://Leeeee16.github.io/tags/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/" rel="self" type="application/rss+xml" /><item>
+    <title>04-一些多进程</title>
+    <link>https://Leeeee16.github.io/04-%E4%B8%80%E4%BA%9B%E5%A4%9A%E8%BF%9B%E7%A8%8B/</link>
+    <pubDate>Sun, 29 Mar 2020 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://Leeeee16.github.io/04-%E4%B8%80%E4%BA%9B%E5%A4%9A%E8%BF%9B%E7%A8%8B/</guid>
+    <description><![CDATA[最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。😉 课程链接 Python多进程的实现 Python中的multiprocessing提供了一些组]]></description>
+</item><item>
+    <title>03-一些线程相关</title>
+    <link>https://Leeeee16.github.io/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/</link>
+    <pubDate>Sat, 28 Mar 2020 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://Leeeee16.github.io/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/</guid>
+    <description><![CDATA[最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。😉 课程链接 啥是进程？ 进程可以理解为是一个可以独立运行的程序单位。举个栗子，比如打开一个浏览器]]></description>
+</item></channel>
+</rss>

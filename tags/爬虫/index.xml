@@ -1,25 +1,14 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>爬虫 on 樂樂阿</title>
-    <link>https://Leeeee16.github.io/tags/%E7%88%AC%E8%99%AB/</link>
-    <description>Recent content in 爬虫 on 樂樂阿</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>zh-CN</language>
-    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
-    <lastBuildDate>Mon, 30 Mar 2020 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="https://Leeeee16.github.io/tags/%E7%88%AC%E8%99%AB/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>05-一些Requests</title>
-      <link>https://Leeeee16.github.io/posts/05-%E4%B8%80%E4%BA%9Brequests/</link>
-      <pubDate>Mon, 30 Mar 2020 00:00:00 +0000</pubDate>
-      
-      <guid>https://Leeeee16.github.io/posts/05-%E4%B8%80%E4%BA%9Brequests/</guid>
-      <description>最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。😉 课程链接 基本用法 安装 pip install requests 基本实例 1 2 3 import requests r = requests.get(&amp;#39;https://lele16.me&amp;#39;) print(r.text) 输出结果为网页的html源代码。 GET</description>
-    </item>
-    
-  </channel>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" version="2.0">
+    <channel>
+        <title>爬虫 - 标签 - 樂樂阿</title>
+        <link>https://Leeeee16.github.io/tags/%E7%88%AC%E8%99%AB/</link>
+        <description>爬虫 - 标签 - 樂樂阿</description>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Mon, 30 Mar 2020 00:00:00 &#43;0000</lastBuildDate><atom:link href="https://Leeeee16.github.io/tags/%E7%88%AC%E8%99%AB/" rel="self" type="application/rss+xml" /><item>
+    <title>05-一些Requests</title>
+    <link>https://Leeeee16.github.io/05-%E4%B8%80%E4%BA%9Brequests/</link>
+    <pubDate>Mon, 30 Mar 2020 00:00:00 &#43;0000</pubDate>
+    <author>作者</author>
+    <guid>https://Leeeee16.github.io/05-%E4%B8%80%E4%BA%9Brequests/</guid>
+    <description><![CDATA[最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。😉 课程链接 基本用法 安装 pip install requests 基本实例 1 2 3 import requests r = requests.get(&#39;https://lele16.me&#39;) print(r.text) 输出结果为网页的html源代码。 GET]]></description>
+</item></channel>
 </rss>

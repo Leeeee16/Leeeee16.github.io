@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>06-一些正则 - 樂樂阿</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="06-一些正则" />
+<meta property="og:description" content="常用的匹配规则 菜鸟教程-正则 match 传入正则表达式，以及字符串，就能返回是否匹配。如果匹配，就返回匹配成功的结果；不匹配，就返回None。注意：m" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Leeeee16.github.io/06-%E4%B8%80%E4%BA%9B%E6%AD%A3%E5%88%99/" />
+<meta property="og:image" content="https://Leeeee16.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-04-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-04-01T00:00:00+00:00" /><meta property="og:site_name" content="樂樂阿" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://Leeeee16.github.io/logo.png"/>
+
+<meta name="twitter:title" content="06-一些正则"/>
+<meta name="twitter:description" content="常用的匹配规则 菜鸟教程-正则 match 传入正则表达式，以及字符串，就能返回是否匹配。如果匹配，就返回匹配成功的结果；不匹配，就返回None。注意：m"/>
+<meta name="application-name" content="樂樂阿">
+<meta name="apple-mobile-web-app-title" content="樂樂阿"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Leeeee16.github.io/06-%E4%B8%80%E4%BA%9B%E6%AD%A3%E5%88%99/" /><link rel="prev" href="https://Leeeee16.github.io/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94/" /><link rel="next" href="https://Leeeee16.github.io/leetcode%E7%AE%97%E6%B3%95%E5%B0%8F%E6%8A%84/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "06-一些正则",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Leeeee16.github.io\/06-%E4%B8%80%E4%BA%9B%E6%AD%A3%E5%88%99\/"
+        },"image": ["https:\/\/Leeeee16.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "正则","wordcount":  1191 ,
+        "url": "https:\/\/Leeeee16.github.io\/06-%E4%B8%80%E4%BA%9B%E6%AD%A3%E5%88%99\/","datePublished": "2020-04-01T00:00:00+00:00","dateModified": "2020-04-01T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/Leeeee16.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "lele"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="樂樂阿"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>樂樂阿</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/Leeeee16" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="樂樂阿"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>樂樂阿</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/Leeeee16" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">06-一些正则</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>lele</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%88%AC%E8%99%AB/"><i class="far fa-folder fa-fw"></i>爬虫</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-04-01">2020-04-01</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1191 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 3 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#常用的匹配规则">常用的匹配规则</a></li>
+        <li><a href="#match">match</a></li>
+        <li><a href="#通用匹配">通用匹配</a></li>
+        <li><a href="#贪婪与非贪婪">贪婪与非贪婪</a></li>
+        <li><a href="#修饰符">修饰符</a></li>
+        <li><a href="#转义字符">转义字符</a></li>
+        <li><a href="#search">search</a></li>
+        <li><a href="#findall">findall</a></li>
+        <li><a href="#sub">sub</a></li>
+        <li><a href="#compile">compile</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><h3 id="常用的匹配规则">常用的匹配规则</h3>
+<p><a href="https://www.runoob.com/regexp/regexp-syntax.html" target="_blank" rel="noopener noreffer">菜鸟教程-正则</a></p>
+<h3 id="match">match</h3>
+<p>传入正则表达式，以及字符串，就能返回是否匹配。如果匹配，就返回匹配成功的结果；不匹配，就返回None。注意：match方法是从字符串的开头开始匹配的！！</p>
+<p>用match方法得到了匹配到的字符串内容，如果我们要从匹配到的字符串中提取一些内容，可以用()将要提取的部分括起来。然后调用group方法传入分组的索引就可以了。示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">content</span> <span class="o">=</span> <span class="s1">&#39;Hello 1234567 World_This is a Regex Demo&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;^Hello\s(\d+)\sWorld&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">span</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">40
+&lt;re.Match object; span=(0, 19), match=&#39;Hello 1234567 World&#39;&gt;
+1234567
+(0, 19)
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="通用匹配">通用匹配</h3>
+<p>.*可以表示通用匹配。其中.可以匹配任意字符（除了换行符）， *代表匹配前面的字符无数次。示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">content</span> <span class="o">=</span> <span class="s1">&#39;Hello 1234567 World_This is a Regex Demo&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;^Hello.*Demo$&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">group</span><span class="p">())</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">span</span><span class="p">())</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">40
+&lt;re.Match object; span=(0, 40), match=&#39;Hello 1234567 World_This is a Regex Demo&#39;&gt;
+Hello 1234567 World_This is a Regex Demo
+(0, 40)
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="贪婪与非贪婪">贪婪与非贪婪</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">content</span> <span class="o">=</span> <span class="s1">&#39;Hello 1234567 qwertyuiop haha&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;^Hello.*(\d+).*haha$&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>上面例子的结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">29
+&lt;re.Match object; span=(0, 29), match=&#39;Hello 1234567 qwertyuiop haha&#39;&gt;
+7
+</code></pre></td></tr></table>
+</div>
+</div><p>只得到了数字7。上面其实是贪婪匹配，.*会匹配尽量多的字符，因此将13456都匹配了，所以(\d+)最后只匹配到一个7。非贪婪匹配应该使用.*?。示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">content</span> <span class="o">=</span> <span class="s1">&#39;Hello 1234567 qwertyuiop haha&#39;</span>
+<span class="k">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">content</span><span class="p">))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="s1">&#39;^Hello.*?(\d+).*haha$&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结果如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">29
+&lt;re.Match object; span=(0, 29), match=&#39;Hello 1234567 qwertyuiop haha&#39;&gt;
+1234567
+</code></pre></td></tr></table>
+</div>
+</div><h3 id="修饰符">修饰符</h3>
+<p>如果字符串中有换行符，使用.*?匹配会出错,需要加一个修饰符re.S。</p>
+<p><code>result = re.match('^He.*?(\d+),*?Demo$', content, re.S)</code></p>
+<p>这样就能匹配字符串中的换行符了。</p>
+<p>还有一些修饰符如表所示：</p>
+<table>
+<thead>
+<tr>
+<th align="center"><div style="width:50pt">修饰符 </div></th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">re.l</td>
+<td>使匹配对大小写不敏感</td>
+</tr>
+<tr>
+<td align="center">re.L</td>
+<td>做本地化识别(locale-aware)匹配</td>
+</tr>
+<tr>
+<td align="center">re.M</td>
+<td>多行匹配，影响^和$</td>
+</tr>
+<tr>
+<td align="center">re.S</td>
+<td>使匹配包括换行在内的所有字符</td>
+</tr>
+<tr>
+<td align="center">re.U</td>
+<td>根据Unicode字符集解析字符。影响\w,\W,\b,\B</td>
+</tr>
+<tr>
+<td align="center">re.X</td>
+<td>该标志通过给予你更灵活的格式以便你将正则表达式写得更易于理解</td>
+</tr>
+</tbody>
+</table>
+<h3 id="转义字符">转义字符</h3>
+<p>和其他的差不多，就是在前面加 \ 就行。如：
+<code>result = re.match('\(啊啊\)www\.baidu\.com', content)</code></p>
+<h3 id="search">search</h3>
+<p>match方法是从开头匹配的。search方法会扫描整个字符串，返回第一个成功匹配的结果。</p>
+<h3 id="findall">findall</h3>
+<p>search方法是返回第一个匹配到的内容。findall就是返回正则表达式匹配到的所有内容。感觉在匹配HTML时可以用到。返回结果是列表类型。</p>
+<h3 id="sub">sub</h3>
+<p>可以修改字符串的内容。第一个参数用来匹配原串，第二个字符是替换成的字符串，第三个参数是原字符串。示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+<span class="n">content</span> <span class="o">=</span> <span class="s1">&#39;55adf2adf2a6d5f8a61daf16&#39;</span>
+<span class="n">content</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s1">&#39;\d+&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">content</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>结果如下：<br>
+<code>adfadfadfadaf</code>去掉了原串的数字。</p>
+<h3 id="compile">compile</h3>
+<p>可以将正则字符串编译成正则表达式对象，以便在后面的匹配中复用。示例如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">re</span>
+
+<span class="n">content1</span> <span class="o">=</span> <span class="s1">&#39;2020年4月13日20:39:28&#39;</span>
+<span class="n">content2</span> <span class="o">=</span> <span class="s1">&#39;2020年4月14日20:39:43&#39;</span>
+<span class="n">content3</span> <span class="o">=</span> <span class="s1">&#39;2020年4月15日20:39:53&#39;</span>
+<span class="n">pattern</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s1">&#39;\d{2}:\d{2}:\d{2}&#39;</span><span class="p">)</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">content1</span><span class="p">)</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">content2</span><span class="p">)</span>
+<span class="n">result3</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="n">pattern</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">content3</span><span class="p">)</span>
+<span class="k">print</span><span class="p">(</span><span class="n">result1</span><span class="p">,</span> <span class="n">result2</span><span class="p">,</span> <span class="n">result3</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>去掉了三个原串中的小时分钟秒，保留了日期。结果如下：<br>
+<code>2020年4月13日 2020年4月14日 2020年4月15日</code></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-04-01</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://Leeeee16.github.io/06-%E4%B8%80%E4%BA%9B%E6%AD%A3%E5%88%99/" data-title="06-一些正则" data-via="xxxx" data-hashtags="正则"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://Leeeee16.github.io/06-%E4%B8%80%E4%BA%9B%E6%AD%A3%E5%88%99/" data-hashtag="正则"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://Leeeee16.github.io/06-%E4%B8%80%E4%BA%9B%E6%AD%A3%E5%88%99/" data-title="06-一些正则"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://Leeeee16.github.io/06-%E4%B8%80%E4%BA%9B%E6%AD%A3%E5%88%99/" data-title="06-一些正则"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://Leeeee16.github.io/06-%E4%B8%80%E4%BA%9B%E6%AD%A3%E5%88%99/" data-title="06-一些正则" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%AD%A3%E5%88%99/">正则</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94/" class="prev" rel="prev" title="LeetCode面试题62. 圆圈中最后剩下的数字-随笔"><i class="fas fa-angle-left fa-fw"></i>LeetCode面试题62. 圆圈中最后剩下的数字-随笔</a>
+            <a href="/leetcode%E7%AE%97%E6%B3%95%E5%B0%8F%E6%8A%84/" class="next" rel="next" title="Leetcode算法小抄-求x平方根">Leetcode算法小抄-求x平方根<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.71.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">樂樂阿</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>

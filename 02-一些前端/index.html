@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="robots" content="noodp" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+        <title>02-一些前端 - 樂樂阿</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="02-一些前端" />
+<meta property="og:description" content="最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。😉 课程链接 CSS定位节点 在CSS中，使用CSS选择器来定位节点 &lt;div id=&quot;container&quot;&gt; 表示为 #container 其中 # 开头表示选择" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://Leeeee16.github.io/02-%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF/" />
+<meta property="og:image" content="https://Leeeee16.github.io/logo.png"/>
+<meta property="article:published_time" content="2020-03-27T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-27T00:00:00+00:00" /><meta property="og:site_name" content="樂樂阿" />
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:image" content="https://Leeeee16.github.io/logo.png"/>
+
+<meta name="twitter:title" content="02-一些前端"/>
+<meta name="twitter:description" content="最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。😉 课程链接 CSS定位节点 在CSS中，使用CSS选择器来定位节点 &lt;div id=&quot;container&quot;&gt; 表示为 #container 其中 # 开头表示选择"/>
+<meta name="application-name" content="樂樂阿">
+<meta name="apple-mobile-web-app-title" content="樂樂阿"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Leeeee16.github.io/02-%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF/" /><link rel="prev" href="https://Leeeee16.github.io/01-html%E5%8E%9F%E7%90%86/" /><link rel="next" href="https://Leeeee16.github.io/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+    {
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        "headline": "02-一些前端",
+        "inLanguage": "zh-CN",
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https:\/\/Leeeee16.github.io\/02-%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF\/"
+        },"image": ["https:\/\/Leeeee16.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "css","wordcount":  1544 ,
+        "url": "https:\/\/Leeeee16.github.io\/02-%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF\/","datePublished": "2020-03-27T00:00:00+00:00","dateModified": "2020-03-27T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@type": "Organization",
+            "name": "xxxx","logo": "https:\/\/Leeeee16.github.io\/images\/avatar.png"},"author": {
+                "@type": "Person",
+                "name": "lele"
+            },"description": ""
+    }
+    </script></head>
+    <body header-desktop="fixed" header-mobile="auto"><script type="text/javascript">(window.localStorage && localStorage.getItem('theme') ? localStorage.getItem('theme') === 'dark' : ('auto' === 'auto' ? window.matchMedia('(prefers-color-scheme: dark)').matches : 'auto' === 'dark')) && document.body.setAttribute('theme', 'dark');</script>
+
+        <div id="mask"></div><div class="wrapper"><header class="desktop" id="header-desktop">
+    <div class="header-wrapper">
+        <div class="header-title">
+            <a href="/" title="樂樂阿"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>樂樂阿</a>
+        </div>
+        <div class="menu">
+            <div class="menu-inner"><a class="menu-item" href="/posts/"> 所有文章 </a><a class="menu-item" href="/tags/"> 标签 </a><a class="menu-item" href="/categories/"> 分类 </a><a class="menu-item" href="/about/"> 关于 </a><a class="menu-item" href="https://github.com/Leeeee16" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i>  </a><span class="menu-item delimiter"></span><span class="menu-item search" id="search-desktop">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-desktop">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-desktop">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </span><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                    <i class="fas fa-adjust fa-fw"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</header><header class="mobile" id="header-mobile">
+    <div class="header-container">
+        <div class="header-wrapper">
+            <div class="header-title">
+                <a href="/" title="樂樂阿"><span class="header-title-pre"><i class='far fa-kiss-wink-heart fa-fw'></i></span>樂樂阿</a>
+            </div>
+            <div class="menu-toggle" id="menu-toggle-mobile">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+        <div class="menu" id="menu-mobile"><div class="search-wrapper">
+                    <div class="search mobile" id="search-mobile">
+                        <input type="text" placeholder="搜索文章标题或内容..." id="search-input-mobile">
+                        <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                            <i class="fas fa-search fa-fw"></i>
+                        </a>
+                        <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                            <i class="fas fa-times-circle fa-fw"></i>
+                        </a>
+                        <span class="search-button search-loading" id="search-loading-mobile">
+                            <i class="fas fa-spinner fa-fw fa-spin"></i>
+                        </span>
+                    </div>
+                    <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+                        取消
+                    </a>
+                </div><a class="menu-item" href="/posts/" title="">所有文章</a><a class="menu-item" href="/tags/" title="">标签</a><a class="menu-item" href="/categories/" title="">分类</a><a class="menu-item" href="/about/" title="">关于</a><a class="menu-item" href="https://github.com/Leeeee16" title="GitHub" rel="noopener noreffer" target="_blank"><i class='fab fa-github fa-fw'></i></a><a href="javascript:void(0);" class="menu-item theme-switch" title="切换主题">
+                <i class="fas fa-adjust fa-fw"></i>
+            </a></div>
+    </div>
+</header>
+<div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+</div>
+<div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+</div>
+<main class="main">
+                <div class="container"><div class="toc" id="toc-auto">
+            <h2 class="toc-title">目录</h2>
+            <div class="toc-content" id="toc-content-auto"></div>
+        </div><article class="page single"><h1 class="single-title animated flipInX">02-一些前端</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>lele</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%88%AC%E8%99%AB/"><i class="far fa-folder fa-fw"></i>爬虫</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-27">2020-03-27</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 1544 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 4 分钟&nbsp;</div>
+        </div><div class="details toc" id="toc-static"  kept="">
+                <div class="details-summary toc-title">
+                    <span>目录</span>
+                    <span><i class="details-icon fas fa-angle-right"></i></span>
+                </div>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><hr>
+<p>最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。😉</p>
+<p><a href="https://kaiwu.lagou.com/course/courseInfo.htm?courseId=46#/content" target="_blank" rel="noopener noreffer">课程链接</a></p>
+<hr>
+<p><strong>CSS定位节点</strong></p>
+<p>在CSS中，使用CSS选择器来定位节点<br>
+<code>&lt;div id=&quot;container&quot;&gt;</code><br>
+表示为 #container<br>
+其中 # 开头表示选择id，后面紧跟id的名称</p>
+<p>同样，如果想选择class为wrapper的节点<br>
+可以使用 .wrapper<br>
+以 &ldquo;.&rdquo; 开头代表选择class，后面紧跟class名称</p>
+<p>也可以根据标签名筛选<br>
+例如想选择二级标题，可以直接用 h2 即可。</p>
+<p>另外CSS选择器还支持嵌套选择，各个选择器之间加上空格分隔开，可以代表嵌套关系。<br>
+如 #container .wrapper p<br>
+表示先选择id为container的节点，然后选择其内部的class为wrapper的节点，进一步选择其内部的p节点。</p>
+<p>CSS选择器，CSS一列表示CSS版本（CSS1，CSS2，或对CSS3）</p>
+<table>
+<thead>
+<tr>
+<th>选择器</th>
+<th>示例</th>
+<th>示例说明</th>
+<th>CSS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>.class</td>
+<td>.intro</td>
+<td>选择所有class=&quot;intro&quot;的元素</td>
+<td>1</td>
+</tr>
+<tr>
+<td>#id</td>
+<td>#firstname</td>
+<td>选择所有id=&quot;firstname&quot;的元素 s</td>
+<td>1</td>
+</tr>
+<tr>
+<td>*</td>
+<td>*</td>
+<td>选择所有元素</td>
+<td>2</td>
+</tr>
+<tr>
+<td>element</td>
+<td>p</td>
+<td>选择所有&lt;p&gt;元素</td>
+<td>1</td>
+</tr>
+<tr>
+<td>element,element</td>
+<td>div,p</td>
+<td>选择所有&lt;div&gt;元素和&lt;p&gt;元素</td>
+<td>1</td>
+</tr>
+<tr>
+<td>element element</td>
+<td>div p</td>
+<td>选择&lt;div&gt;元素内的所有&lt;p&gt;元素</td>
+<td>1</td>
+</tr>
+<tr>
+<td>element&gt;element</td>
+<td>div&gt;p</td>
+<td>选择所有父级是 &lt;div&gt; 元素的 &lt;p&gt; 元素</td>
+<td>2</td>
+</tr>
+<tr>
+<td>element+element</td>
+<td>div+p</td>
+<td>选择所有紧接着&lt;div&gt;元素之后的&lt;p&gt;元素</td>
+<td>2</td>
+</tr>
+<tr>
+<td>[attribute]</td>
+<td>[target]</td>
+<td>选择所有带有target属性元素</td>
+<td>2</td>
+</tr>
+<tr>
+<td>[attribute=value]</td>
+<td>[target=-blank]</td>
+<td>选择所有使用target=&rdquo;-blank&quot;的元素</td>
+<td>2</td>
+</tr>
+<tr>
+<td>[attribute~=value]</td>
+<td>[title~=flower]</td>
+<td>选择标题属性包含单词&quot;flower&quot;的所有元素</td>
+<td>2</td>
+</tr>
+<tr>
+<td>[attribute|=language]</td>
+<td>[lang|=en]</td>
+<td>选择 lang 属性以 en 为开头的所有元素</td>
+<td>2</td>
+</tr>
+<tr>
+<td>:link</td>
+<td>a:link</td>
+<td>选择所有未访问链接</td>
+<td>1</td>
+</tr>
+<tr>
+<td>:visited</td>
+<td>a:visited</td>
+<td>选择所有访问过的链接</td>
+<td>1</td>
+</tr>
+<tr>
+<td>:active</td>
+<td>a:active</td>
+<td>选择活动链接</td>
+<td>1</td>
+</tr>
+<tr>
+<td>:hover</td>
+<td>a:hover</td>
+<td>选择鼠标在链接上面时</td>
+<td>1</td>
+</tr>
+<tr>
+<td>:focus</td>
+<td>input:focus</td>
+<td>选择具有焦点的输入元素</td>
+<td>2</td>
+</tr>
+<tr>
+<td>:first-letter</td>
+<td>p:first-letter</td>
+<td>选择每一个&lt;p&gt;元素的第一个字母</td>
+<td>1</td>
+</tr>
+<tr>
+<td>:first-line</td>
+<td>p:first-line</td>
+<td>选择每一个&lt;p&gt;元素的第一行</td>
+<td>1</td>
+</tr>
+<tr>
+<td>:first-child</td>
+<td>p:first-child</td>
+<td>指定只有当&lt;p&gt;元素是其父级的第一个子级的样式。</td>
+<td>2</td>
+</tr>
+<tr>
+<td>:before</td>
+<td>p:before</td>
+<td>在每个&lt;p&gt;元素之前插入内容</td>
+<td>2</td>
+</tr>
+<tr>
+<td>:after</td>
+<td>p:after</td>
+<td>在每个&lt;p&gt;元素之后插入内容</td>
+<td>2</td>
+</tr>
+<tr>
+<td>:lang(language)</td>
+<td>p:lang(it)</td>
+<td>选择一个lang属性的起始值=&quot;it&quot;的所有&lt;p&gt;元素</td>
+<td>2</td>
+</tr>
+<tr>
+<td>element1~element2</td>
+<td>p~ul</td>
+<td>选择p元素之后的每一个ul元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>[attribute^=value]</td>
+<td>a[src^=&quot;https&rdquo;]</td>
+<td>选择每一个src属性的值以&quot;https&quot;开头的元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>[attribute$=value]</td>
+<td>a[src$=&rdquo;.pdf&rdquo;]</td>
+<td>选择每一个src属性的值以&rdquo;.pdf&quot;结尾的元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>[attribute*=value]</td>
+<td>a[src*=&quot;runoob&rdquo;]</td>
+<td>选择每一个src属性的值包含子字符串&quot;runoob&quot;的元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:first-of-type</td>
+<td>p:first-of-type</td>
+<td>选择每个p元素是其父级的第一个p元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:last-of-type</td>
+<td>p:last-of-type</td>
+<td>选择每个p元素是其父级的最后一个p元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:only-of-type</td>
+<td>p:only-of-type</td>
+<td>选择每个p元素是其父级的唯一p元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:only-child</td>
+<td>p:only-child</td>
+<td>选择每个p元素是其父级的唯一子元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:nth-child(n)</td>
+<td>p:nth-child(2)</td>
+<td>选择每个p元素是其父级的第二个子元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:nth-last-child(n)</td>
+<td>p:nth-last-child(2)</td>
+<td>选择每个p元素的是其父级的第二个子元素，从最后一个子项计数</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:nth-of-type(n)</td>
+<td>p:nth-of-type(2)</td>
+<td>选择每个p元素是其父级的第二个p元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:nth-last-of-type(n)</td>
+<td>p:nth-last-of-type(2)</td>
+<td>选择每个p元素的是其父级的第二个p元素，从最后一个子项计数</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:last-child</td>
+<td>p:last-child</td>
+<td>选择每个p元素是其父级的最后一个子级。</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:root</td>
+<td>:root</td>
+<td>选择文档的根元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:empty</td>
+<td>p:empty</td>
+<td>选择每个没有任何子级的p元素（包括文本节点）</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:target</td>
+<td>#news:target</td>
+<td>选择当前活动的#news元素（包含该锚名称的点击的URL）</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:enabled</td>
+<td>input:enabled</td>
+<td>选择每一个已启用的输入元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:disabled</td>
+<td>input:disabled</td>
+<td>选择每一个禁用的输入元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:checked</td>
+<td>input:checked</td>
+<td>选择每个选中的输入元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:not(selector)</td>
+<td>:not(p)</td>
+<td>选择每个并非p元素的元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>::selection</td>
+<td>::selection</td>
+<td>匹配元素中被用户选中或处于高亮状态的部分</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:out-of-range</td>
+<td>:out-of-range</td>
+<td>匹配值在指定区间之外的input元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:in-range</td>
+<td>:in-range</td>
+<td>匹配值在指定区间之内的input元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:read-write</td>
+<td>:read-write</td>
+<td>用于匹配可读及可写的元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:read-only</td>
+<td>:read-only</td>
+<td>用于匹配设置 &ldquo;readonly&rdquo;（只读） 属性的元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:optional</td>
+<td>:optional</td>
+<td>用于匹配可选的输入元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:required</td>
+<td>:required</td>
+<td>用于匹配设置了 &ldquo;required&rdquo; 属性的元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:valid</td>
+<td>:valid</td>
+<td>用于匹配输入值为合法的元素</td>
+<td>3</td>
+</tr>
+<tr>
+<td>:invalid</td>
+<td>:invalid</td>
+<td>用于匹配输入值为非法的元素</td>
+<td>3</td>
+</tr>
+</tbody>
+</table>
+<p><a href="https://www.runoob.com/cssref/css-selectors.html" target="_blank" rel="noopener noreffer">菜鸟教程-CSS选择器</a></p>
+</div><div class="post-footer" id="post-footer">
+    <div class="post-info">
+        <div class="post-info-line">
+            <div class="post-info-mod">
+                <span>更新于 2020-03-27</span>
+            </div>
+            <div class="post-info-license"></div>
+        </div>
+        <div class="post-info-line">
+            <div class="post-info-md"></div>
+            <div class="post-info-share">
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://Leeeee16.github.io/02-%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF/" data-title="02-一些前端" data-via="xxxx" data-hashtags="css"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://Leeeee16.github.io/02-%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF/" data-hashtag="css"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://Leeeee16.github.io/02-%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF/" data-title="02-一些前端"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://Leeeee16.github.io/02-%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF/" data-title="02-一些前端"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://Leeeee16.github.io/02-%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF/" data-title="02-一些前端" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+            </div>
+        </div>
+    </div>
+
+    <div class="post-info-more">
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/css/">css</a></section>
+        <section>
+            <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+        </section>
+    </div>
+
+    <div class="post-nav"><a href="/01-html%E5%8E%9F%E7%90%86/" class="prev" rel="prev" title="01-一些HTMl原理"><i class="fas fa-angle-left fa-fw"></i>01-一些HTMl原理</a>
+            <a href="/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/" class="next" rel="next" title="03-一些线程相关">03-一些线程相关<i class="fas fa-angle-right fa-fw"></i></a></div>
+</div>
+</article></div>
+            </main><footer class="footer">
+        <div class="footer-container"><div class="footer-line">由 <a href="https://gohugo.io/" target="_blank" rel="noopener noreffer" title="Hugo 0.71.0">Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/dillonzq/LoveIt" target="_blank" rel="noopener noreffer" title="LoveIt 0.2.10"><i class="far fa-kiss-wink-heart fa-fw"></i> LoveIt</a>
+                </div><div class="footer-line"><i class="far fa-copyright fa-fw"></i><span itemprop="copyrightYear">2019 - 2020</span><span class="author" itemprop="copyrightHolder">&nbsp;<a href="/" target="_blank">樂樂阿</a></span>&nbsp;|&nbsp;<span class="license"><a rel="license external nofollow noopener noreffer" href="https://creativecommons.org/licenses/by-nc/4.0/" target="_blank">CC BY-NC 4.0</a></span></div>
+        </div>
+    </footer></div>
+
+        <div id="fixed-buttons"><a href="#" id="back-to-top" class="fixed-button" title="回到顶部">
+                <i class="fas fa-arrow-up fa-fw"></i>
+            </a><a href="#" id="view-comments" class="fixed-button" title="查看评论">
+                <i class="fas fa-comment fa-fw"></i>
+            </a>
+        </div><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/smooth-scroll@16.1.3/dist/smooth-scroll.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/autocomplete.js@0.37.1/dist/autocomplete.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lunr@2.3.8/lunr.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.stemmer.support.min.js"></script><script type="text/javascript" src="/lib/lunr/lunr.zh.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/lazysizes@5.2.2/lazysizes.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js"></script><script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sharer.js@0.4.0/sharer.min.js"></script><script type="text/javascript">window.config={"code":{"copyTitle":"复制到剪贴板","maxShownLines":10},"comment":{},"search":{"highlightTag":"em","lunrIndexURL":"/index.json","lunrLanguageCode":"zh","lunrSegmentitURL":"/lib/lunr/lunr.segmentit.js","maxResultLength":10,"noResultsFound":"没有找到结果","snippetLength":50,"type":"lunr"}};</script><script type="text/javascript" src="/js/theme.min.js"></script></body>
+</html>
