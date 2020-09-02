@@ -5,32 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>ASP.NET Core 随笔 - 樂樂阿</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="ASP.NET Core 随笔" />
-<meta property="og:description" content="Singleton、Transient和Scoped Singlenton：在整个web项目的生命周期里，只会出现一个web实例。 Transient: 每次有其他" />
+        <title>03-一些线程相关 - 樂樂阿</title><meta name="Description" content="关于 LoveIt 主题"><meta property="og:title" content="03-一些线程相关" />
+<meta property="og:description" content="最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。😉 课程链接 啥是进程？ 进程可以理解为是一个可以独立运行的程序单位。举个栗子，比如打开一个浏览器" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://Leeeee16.github.io/2020/06/netcore%E9%9A%8F%E7%AC%94/" />
+<meta property="og:url" content="https://Leeeee16.github.io/posts/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/" />
 <meta property="og:image" content="https://Leeeee16.github.io/logo.png"/>
-<meta property="article:published_time" content="2020-06-11T23:51:07+08:00" />
-<meta property="article:modified_time" content="2020-06-11T23:51:07+08:00" /><meta property="og:site_name" content="樂樂阿" />
+<meta property="article:published_time" content="2020-03-28T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-03-28T00:00:00+00:00" /><meta property="og:site_name" content="樂樂阿" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://Leeeee16.github.io/logo.png"/>
 
-<meta name="twitter:title" content="ASP.NET Core 随笔"/>
-<meta name="twitter:description" content="Singleton、Transient和Scoped Singlenton：在整个web项目的生命周期里，只会出现一个web实例。 Transient: 每次有其他"/>
+<meta name="twitter:title" content="03-一些线程相关"/>
+<meta name="twitter:description" content="最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。😉 课程链接 啥是进程？ 进程可以理解为是一个可以独立运行的程序单位。举个栗子，比如打开一个浏览器"/>
 <meta name="application-name" content="樂樂阿">
 <meta name="apple-mobile-web-app-title" content="樂樂阿"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Leeeee16.github.io/2020/06/netcore%E9%9A%8F%E7%AC%94/" /><link rel="prev" href="https://Leeeee16.github.io/2020/06/c-sharp%E7%AC%94%E8%AE%B0/" /><link rel="next" href="https://Leeeee16.github.io/2020/07/java_basic/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Leeeee16.github.io/posts/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/" /><link rel="prev" href="https://Leeeee16.github.io/posts/02-%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF/" /><link rel="next" href="https://Leeeee16.github.io/posts/04-%E4%B8%80%E4%BA%9B%E5%A4%9A%E8%BF%9B%E7%A8%8B/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "ASP.NET Core 随笔",
+        "headline": "03-一些线程相关",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/Leeeee16.github.io\/2020\/06\/netcore%E9%9A%8F%E7%AC%94\/"
-        },"image": ["https:\/\/Leeeee16.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "技术, ASP.NET Core, c#","wordcount":  774 ,
-        "url": "https:\/\/Leeeee16.github.io\/2020\/06\/netcore%E9%9A%8F%E7%AC%94\/","datePublished": "2020-06-11T23:51:07+08:00","dateModified": "2020-06-11T23:51:07+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@id": "https:\/\/Leeeee16.github.io\/posts\/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3\/"
+        },"image": ["https:\/\/Leeeee16.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "基础理论知识","wordcount":  842 ,
+        "url": "https:\/\/Leeeee16.github.io\/posts\/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3\/","datePublished": "2020-03-28T00:00:00+00:00","dateModified": "2020-03-28T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/Leeeee16.github.io\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -104,73 +104,61 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">ASP.NET Core 随笔</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>lele</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/asp.net-core/"><i class="far fa-folder fa-fw"></i>ASP.NET Core</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-06-11">2020-06-11</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 774 字&nbsp;
+        </div><article class="page single"><h1 class="single-title animated flipInX">03-一些线程相关</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>lele</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/%E7%88%AC%E8%99%AB/"><i class="far fa-folder fa-fw"></i>爬虫</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-28">2020-03-28</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 842 字&nbsp;
                 <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
                 <div class="details-summary toc-title">
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
-  <ul>
-    <li><a href="#singletontransient和scoped">Singleton、Transient和Scoped</a></li>
-    <li><a href="#管道和中间件">管道和中间件</a></li>
-    <li><a href="#页面传值">页面传值</a></li>
-    <li><a href="#传图片">传图片</a></li>
-    <li><a href="#连接数据库字符编码相关">连接数据库字符编码相关</a></li>
-  </ul>
-</nav></div>
-            </div><div class="content" id="content"><h2 id="singletontransient和scoped">Singleton、Transient和Scoped</h2>
-<ol>
-<li>Singlenton：在整个web项目的生命周期里，只会出现一个web实例。</li>
-<li>Transient: 每次有其他的类、其他的方法请求服务的时候，他都会建立一个新的实例。</li>
-<li>Scoped: 每次HTTP请求，会生成一个实例。在web请求期间，如果多次请求，他还是使用同一个service。</li>
-</ol>
-<p>注册服务：在Startup.cs中的ConfigureServices方法中。<br>
-<code>services.AddScoped&lt;IxxxService,xxxService&gt;();</code></p>
-<h2 id="管道和中间件">管道和中间件</h2>
-<p>如何处理HTTP请求？<br>
-中间件决定怎样处理请求，中间件可以有很多，每个中间件只负责一小部分内容。<br>
-比如：一个请求<em>POST/Product</em>。
-Logger中间件：记录各种请求的信息，记录之后传给下一个中间件。<br>
-授权中间件：找一个特定的cookie，如果找到这个cookie，则允许这个请求继续前进~如果没找到，则返回登录页，或者异常页面。<br>
-路由中间件：看请求的url，即**POST/Product。然后解析路由，找到可以响应这个请求的玩意儿，它可以响应请求，并返回一个JSON或者HTML。<br>
-因为管道是双向设计的，响应就会原路返回。方向和请求进来的方向相反。<br>
-路由-&gt;授权-&gt;Logger。<br>
-其他中间件：静态文件、MVC等等。</p>
-<h2 id="页面传值">页面传值</h2>
-<p>页面传值时，前段向后端传值时，有些不需要输入的字段，可以用input标签的hidden，定义一个隐藏域，将值传过去。</p>
-<h2 id="传图片">传图片</h2>
-<p>form标签中添加enctype=&quot;multipart/form-data&rdquo;，表示编码类型可以为二进制，可以完整地传递文件数据，包括图片等等。</p>
-<h2 id="连接数据库字符编码相关">连接数据库字符编码相关</h2>
-<p>我写的时候用的EF core。在连接字符串中加入CharSet=utf8，用EF core自动生成数据库和表时，编码好像还是不对。所以在迁移之前，先手动创建数据库，设置编码为utf8，然后再migration自动创建表和字段。</p>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
+            </div><div class="content" id="content"><hr>
+<p>最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。😉</p>
+<p><a href="https://kaiwu.lagou.com/course/courseInfo.htm?courseId=46#/content" target="_blank" rel="noopener noreffer">课程链接</a></p>
+<hr>
+<p><strong>啥是进程？</strong></p>
+<p>进程可以理解为是一个可以独立运行的程序单位。举个栗子，比如打开一个浏览器，这就开启了一个浏览器进程。在一个进程中，显然是需要处理很多事情的，比如在网页上打开多个页面、播放音乐、看视频等等，那一个浏览器进程如何处理这么多任务呢？其实这些任务就是在一个个线程上执行的。</p>
+<p><strong>啥是线程？</strong></p>
+<p>进程可以看做是线程的集合。一个进程可以由一个或者多个线程构成。线程也是操作系统进行运算调度的最小单位，是进程中的一个最小运行单元。</p>
+<p><strong>多线程？</strong></p>
+<p>顾名思义，就是一个进程中，同时执行多个线程。</p>
+<p><strong>并发和并行？</strong></p>
+<p>这是两个比较容易混淆的概念。
+<strong>并发</strong>(concurrency),是指同一时刻只能执行一条指令，但是多个线程的对应的指令被快速轮换地执行。</p>
+<p>因为处理器执行指令的速度和切换的速度都很快，因此在宏观上看起来是多个线程在同时运行。但微观上其实处理器是在连续不断地在多个线程之间切换和执行，每个线程的执行会占用处理器的一个时间片，同一时刻只有一个线程在执行。</p>
+<p><strong>并行</strong>(parallel),是指同一时刻有多条指令在多个处理器上同时执行，因此需要依赖多个处理器。无论在宏观上还是微观上，多个线程都是在同一时刻一起执行的。</p>
+<p>并行只能在多核处理器系统中存在。</p>
+<p><strong>多线程用在哪儿？</strong></p>
+<p>在一个进程中，有些操作是需要比较耗时的，比如等待数据库的查询结果的返回，等待网页响应等等。如果使用单线程，则必须等待这些操作完成之后才能继续往下执行其他操作，而这个线程在等待的过程中，处理器明显是可以来执行其他的操作的。如果使用多线程，处理器就可以在某个线程等待的时候，去执行其他的线程，从而从整体上提高执行效率。</p>
+<p>网络爬虫在向服务器发起请求后，需要一段时间来等待服务器返回响应。这种任务属于IO密集型任务。对于这种任务可以使用多线程，提高整体的爬取效率。</p>
+<p>但如果是计算密集型任务，也成为CPU密集型任务。就是一直算算算的任务，使用多线程的话，并不能减少计算总量，反而还会增加线程切换的耗时，效率因此会变低。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-06-11</span>
+                <span>更新于 2020-03-28</span>
             </div>
             <div class="post-info-license"></div>
         </div>
         <div class="post-info-line">
             <div class="post-info-md"></div>
             <div class="post-info-share">
-                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://Leeeee16.github.io/2020/06/netcore%E9%9A%8F%E7%AC%94/" data-title="ASP.NET Core 随笔" data-via="xxxx" data-hashtags="技术,ASP.NET Core,c#"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://Leeeee16.github.io/2020/06/netcore%E9%9A%8F%E7%AC%94/" data-hashtag="技术"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://Leeeee16.github.io/2020/06/netcore%E9%9A%8F%E7%AC%94/" data-title="ASP.NET Core 随笔"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://Leeeee16.github.io/2020/06/netcore%E9%9A%8F%E7%AC%94/" data-title="ASP.NET Core 随笔"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://Leeeee16.github.io/2020/06/netcore%E9%9A%8F%E7%AC%94/" data-title="ASP.NET Core 随笔" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
+                <span><a href="javascript:void(0);" title="分享到 Twitter" data-sharer="twitter" data-url="https://Leeeee16.github.io/posts/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/" data-title="03-一些线程相关" data-via="xxxx" data-hashtags="基础理论知识"><i class="fab fa-twitter fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Facebook" data-sharer="facebook" data-url="https://Leeeee16.github.io/posts/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/" data-hashtag="基础理论知识"><i class="fab fa-facebook-square fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Hacker News" data-sharer="hackernews" data-url="https://Leeeee16.github.io/posts/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/" data-title="03-一些线程相关"><i class="fab fa-hacker-news fa-fw"></i></a><a href="javascript:void(0);" title="分享到 Line" data-sharer="line" data-url="https://Leeeee16.github.io/posts/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/" data-title="03-一些线程相关"><i data-svg-src="https://cdn.jsdelivr.net/npm/simple-icons@2.14.0/icons/line.svg"></i></a><a href="javascript:void(0);" title="分享到 微博" data-sharer="weibo" data-url="https://Leeeee16.github.io/posts/03-%E4%B8%80%E4%BA%9B%E7%BA%BF%E7%A8%8B%E7%9B%B8%E5%85%B3/" data-title="03-一些线程相关" data-ralateuid="xxxx"><i class="fab fa-weibo fa-fw"></i></a></span>
             </div>
         </div>
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E6%8A%80%E6%9C%AF/">技术</a>,&nbsp;<a href="/tags/asp.net-core/">ASP.NET Core</a>,&nbsp;<a href=""></a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="/tags/%E5%9F%BA%E7%A1%80%E7%90%86%E8%AE%BA%E7%9F%A5%E8%AF%86/">基础理论知识</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="/2020/06/c-sharp%E7%AC%94%E8%AE%B0/" class="prev" rel="prev" title="C-sharp随笔"><i class="fas fa-angle-left fa-fw"></i>C-sharp随笔</a>
-            <a href="/2020/07/java_basic/" class="next" rel="next" title="Java基础">Java基础<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="/posts/02-%E4%B8%80%E4%BA%9B%E5%89%8D%E7%AB%AF/" class="prev" rel="prev" title="02-一些前端"><i class="fas fa-angle-left fa-fw"></i>02-一些前端</a>
+            <a href="/posts/04-%E4%B8%80%E4%BA%9B%E5%A4%9A%E8%BF%9B%E7%A8%8B/" class="next" rel="next" title="04-一些多进程">04-一些多进程<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 </article></div>
             </main><footer class="footer">

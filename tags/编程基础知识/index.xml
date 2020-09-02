@@ -5,17 +5,17 @@
         <description>编程基础知识 - 标签 - 樂樂阿</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 08 Jul 2020 11:33:55 &#43;0800</lastBuildDate><atom:link href="https://Leeeee16.github.io/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="self" type="application/rss+xml" /><item>
     <title>Java基础</title>
-    <link>https://Leeeee16.github.io/2020/07/java_basic/</link>
+    <link>https://Leeeee16.github.io/posts/java_basic/</link>
     <pubDate>Wed, 08 Jul 2020 11:33:55 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://Leeeee16.github.io/2020/07/java_basic/</guid>
+    <guid>https://Leeeee16.github.io/posts/java_basic/</guid>
     <description><![CDATA[重新看看Java基础 顺便随便记一些基础的东西。。😃 Java内存结构概述 栈(Stack): 存放方法中的局部变量。一旦超出作用域，java会自动]]></description>
 </item><item>
     <title>C-sharp随笔</title>
-    <link>https://Leeeee16.github.io/2020/06/c-sharp%E7%AC%94%E8%AE%B0/</link>
+    <link>https://Leeeee16.github.io/posts/c-sharp%E7%AC%94%E8%AE%B0/</link>
     <pubDate>Wed, 03 Jun 2020 22:56:00 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://Leeeee16.github.io/2020/06/c-sharp%E7%AC%94%E8%AE%B0/</guid>
+    <guid>https://Leeeee16.github.io/posts/c-sharp%E7%AC%94%E8%AE%B0/</guid>
     <description><![CDATA[out 如果在一个方法中想返回多个相同类型的值，可以考虑返回一个数组。 如果返回多个不同类型的值，数组就不能用了，可以考虑用out参数。 注意:首先在]]></description>
 </item></channel>
 </rss>

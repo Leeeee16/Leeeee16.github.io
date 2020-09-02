@@ -5,24 +5,24 @@
         <description>算法 - 标签 - 樂樂阿</description>
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sat, 09 May 2020 10:24:11 &#43;0800</lastBuildDate><atom:link href="https://Leeeee16.github.io/tags/%E7%AE%97%E6%B3%95/" rel="self" type="application/rss+xml" /><item>
     <title>Leetcode算法小抄-求x平方根</title>
-    <link>https://Leeeee16.github.io/2020/05/leetcode%E7%AE%97%E6%B3%95%E5%B0%8F%E6%8A%84/</link>
+    <link>https://Leeeee16.github.io/posts/leetcode%E7%AE%97%E6%B3%95%E5%B0%8F%E6%8A%84/</link>
     <pubDate>Sat, 09 May 2020 10:24:11 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://Leeeee16.github.io/2020/05/leetcode%E7%AE%97%E6%B3%95%E5%B0%8F%E6%8A%84/</guid>
+    <guid>https://Leeeee16.github.io/posts/leetcode%E7%AE%97%E6%B3%95%E5%B0%8F%E6%8A%84/</guid>
     <description><![CDATA[题目：计算并返回x的平方根 法1：二分查找 每次比较mid*mid与x的大小，注意mid*mid可能会越界，所以用long long来表示，或者可]]></description>
 </item><item>
     <title>LeetCode面试题62. 圆圈中最后剩下的数字-随笔</title>
-    <link>https://Leeeee16.github.io/2020/03/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94/</link>
+    <link>https://Leeeee16.github.io/posts/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94/</link>
     <pubDate>Mon, 30 Mar 2020 13:04:25 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://Leeeee16.github.io/2020/03/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94/</guid>
+    <guid>https://Leeeee16.github.io/posts/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94/</guid>
     <description><![CDATA[题目：0,1,&hellip;,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字]]></description>
 </item><item>
     <title>LeetCode1162.地图分析-随笔</title>
-    <link>https://Leeeee16.github.io/2020/03/leetcode1162/</link>
+    <link>https://Leeeee16.github.io/posts/leetcode1162/</link>
     <pubDate>Sun, 29 Mar 2020 12:38:32 &#43;0800</pubDate>
     <author>作者</author>
-    <guid>https://Leeeee16.github.io/2020/03/leetcode1162/</guid>
+    <guid>https://Leeeee16.github.io/posts/leetcode1162/</guid>
     <description><![CDATA[题目:1162.地图分析 你现在手里有一份大小为 N x N 的『地图』（网格） grid，上面的每个『区域』（单元格）都用 0 和 1 标记好了。其中 0 代表海]]></description>
 </item></channel>
 </rss>
