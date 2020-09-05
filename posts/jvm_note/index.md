@@ -241,8 +241,67 @@ Demo:
 * 方法返回地址(Return Address)(或方法正常退出或者异常退出的定义)  
 * 一些附加信息  
 ##### 局部变量表(Local Variables)  
-* 也成局部变量数组或本地变量表  
+* 也称局部变量数组或本地变量表  
 * 定义一个**数字数组**，主要用于存储方法参数和定义在方法体内的局部变量(各类基本数据类型、对象引用(reference)、returnAddress类型)  
 * 局部变量表建立在线程的栈上，是线程私有的数据，因此不存在数据安全问题  
-* 局部变量表所需的容量大小是在编译期确定的，并保存在方法的Code属性的maximum local variables数据项中。在方法运行期间是不会改变局部变量表的大小的。  
-* 
+* 局部变量表所需的容量大小是在**编译期**确定的，并保存在方法的Code属性的maximum local variables数据项中。在方法运行期间是不会改变局部变量表的大小的。  
+* 方法嵌套调用的次数由栈的大小决定。站越大，方法嵌套调用次数越多。  
+* 局部变量表中的变量只在当前方法调用中有效。在方法执行时，虚拟机通过使用局部变量表完成参数值到参数变量列表的传递过程。当方法调用结束后，随着方法栈帧的销毁，局部变量表也会随之销毁。  
+* Slot:  
+    * 局部变量表，最基本的存储单元是Slot(变量槽)  
+    * 32位以内的类型只占用一个slot(包括returnAddress类型)；64位的类型(long和double)占用两个slot  
+        > byte、short、char在存储前被转换为int，boolean也被转换为int(0为false，1为true)  
+    * JVM会为局部变量表中的每一个Slot都分配一个访问索引，通过这个索引即可访问到局部变量表中指定的局部变量值  
+    * 局部变量按照声明的顺序被复制到局部变量表的每一个Slot上  
+    * 如果当前帧是由构造方法或者实例方法创建的，那么**该对象引用this将会存放在index为0的slot处**，其余的参数按照参数表顺序继续排列  
+
+    Demo:  
+    ```java
+    package com.demo;
+
+    public class LocalVariablesTest {
+        public static void main(String[] args) {
+            LocalVariablesTest test = new LocalVariablesTest();
+            double a = 9.6;
+            int b = 6;
+            test.add(a, b);
+
+        }
+
+        public double add(double a, int b) {
+            System.out.println("a = " + a);
+            System.out.println("b = " + b);
+            System.out.println("a + b = " + (a + b));
+            return a + b;
+        }
+    }
+    ```  
+    ![](/images/JVM_Note/jububianliangbiao.jpg)  
+    * 栈帧中的局部变量表中的槽位是可以重复利用的。如果一个局部变量过了其作用域，那么在其作用域之后申明的新的局部变量就很可能会服用过期局部变量的槽位，从而节省资源  
+    ```java
+    public void test(){
+        int a = 0;
+        {
+            int b = 0;
+            b = a + 1;
+        }
+        int c = a + 1;
+    }
+    ```  
+    虽然上述方法有四个变量，但是局部变量表的槽位只有三个。变量b在出了括号后，过了其作用域。因此时候声明的变量c占了之前b的slot的位置。这样就节省了资源。  
+    ![](/images/JVM_Note/JVM_jububianliangbiao2.jpg)  
+
+{{< admonition type=tip title="回顾" open=true >}}
+变量的分类：  
+* 按照数据类型分：1. 基本数据类型 2. 引用数据类型  
+* 按照在类中声明的位置分：  
+    1. 成员变量：在使用前，都经历过默认初始化赋值  
+        * 类变量：linking的prepare阶段：给类变量默认赋值 ---> initial阶段：给类变量显式赋值即静态代码块赋值  
+        * 实例变量：随着对象的创建，会在对空间中分配实例变量空间，并进行默认赋值  
+    2. 局部变量：在使用前，必须进行显式赋值。否则编译不通过
+{{< /admonition >}}  
+  
+{{< admonition type=msg title="补充说明" open=true >}}
+* 在栈帧中，与性能调优关系最密切的部分就是局部变量表。在方法执行时，虚拟机使用局部变量表完成方法的传递。如果局部变量表中的变量不存在了，指向堆空间的指针也就不存在了，那么堆中垃圾就需要被回收  
+* **局部变量表中的变量也是重要的垃圾回收根节点，只要被局部变量表中直接或间接引用的对象都不会被回收**
+{{< /admonition >}}
