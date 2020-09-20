@@ -846,29 +846,4 @@ public class DemoFanxing {
             }
         }
     ```  
-## 多线程  
-* 三种创建方式：  
-    1. 继承Thread类  
-        * 自定义线程类继承Thread类  
-        * 重写run()方法，编写线程执行体  
-        * 创建线程对象，调用start()方法启动线程  
-        > 线程开启不一定立即执行，由CPU调度  
-        > 启动线程：子类对象.start()
-    2. 实现Runnable接口  
-        * 定义MyRunnable类实现Runnable接口  
-        * 实现run()方法，编写线程执行体  
-        * 创建线程对象，调用start()方法启动线程  
-        > 启动线程：传入目标对象+Thread对象.start()  
-        > 该方式更加灵活方便，方便同一个对象被多个线程使用  
-    3. 实现Callable接口  
-        * 实现Callable接口，需要返回值类型  
-        * 重写call方法，需要抛出异常  
-        * 创建目标对象  
-        * 创建执行服务：`ExecutorService ser = Executors.newFixedThreadPool(1);`  
-        * 提交执行：`Future<Boolean> result1 = ser.submit(t1);`  
-        * 获取结果：`boolean r1 = result1.get()`  
-        * 关闭服务：`ser.shutdownNow();`  
-        > 可以定义返回值  
-        > 可以抛出异常
-
 

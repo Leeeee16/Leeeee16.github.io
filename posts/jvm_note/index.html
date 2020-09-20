@@ -20,7 +20,7 @@
 <meta name="application-name" content="樂樂阿">
 <meta name="apple-mobile-web-app-title" content="樂樂阿"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Leeeee16.github.io/posts/jvm_note/" /><link rel="prev" href="https://Leeeee16.github.io/posts/java_basic/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="manifest" href="/site.webmanifest"><link rel="canonical" href="https://Leeeee16.github.io/posts/jvm_note/" /><link rel="prev" href="https://Leeeee16.github.io/posts/java_basic/" /><link rel="next" href="https://Leeeee16.github.io/posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
@@ -29,7 +29,7 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/Leeeee16.github.io\/posts\/jvm_note\/"
-        },"image": ["https:\/\/Leeeee16.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Java","wordcount":  6684 ,
+        },"image": ["https:\/\/Leeeee16.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Java","wordcount":  7142 ,
         "url": "https:\/\/Leeeee16.github.io\/posts\/jvm_note\/","datePublished": "2020-08-10T15:07:30+08:00","dateModified": "2020-09-05T16:55:30+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/Leeeee16.github.io\/images\/avatar.png"},"author": {
@@ -106,8 +106,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">JVM学习随笔</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>lele</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java/"><i class="far fa-folder fa-fw"></i>Java</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-10">2020-08-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 6684 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 14 分钟&nbsp;<span id="/posts/jvm_note/" class="leancloud_visitors" data-flag-title="JVM学习随笔">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-08-10">2020-08-10</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 7142 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 15 分钟&nbsp;<span id="/posts/jvm_note/" class="leancloud_visitors" data-flag-title="JVM学习随笔">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -149,8 +149,10 @@
             <li><a href="#栈帧的内部结构">栈帧的内部结构</a>
               <ul>
                 <li><a href="#局部变量表local-variables">局部变量表(Local Variables)</a></li>
+                <li><a href="#操作数栈operand-stack">操作数栈(Operand Stack)</a></li>
               </ul>
             </li>
+            <li><a href="#栈顶缓存技术tos-top-of-stack-cashing">栈顶缓存技术(ToS, Top-of-Stack Cashing)</a></li>
           </ul>
         </li>
       </ul>
@@ -694,28 +696,19 @@ Demo:
         data-sizes="auto"
         alt="/images/JVM_Note/JVM_jububianliangbiao2.jpg"
         title="/images/JVM_Note/JVM_jububianliangbiao2.jpg" /></p>
-</li>
-</ul>
 <div class="details admonition tip open">
         <div class="details-summary admonition-title">
             <i class="icon fas fa-lightbulb fa-fw"></i>回顾<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content"><p>变量的分类：</p>
-<ul>
-<li>按照数据类型分：1. 基本数据类型 2. 引用数据类型</li>
-<li>按照在类中声明的位置分：
-<ol>
-<li>成员变量：在使用前，都经历过默认初始化赋值
-<ul>
-<li>类变量：linking的prepare阶段：给类变量默认赋值 &mdash;&gt; initial阶段：给类变量显式赋值即静态代码块赋值</li>
-<li>实例变量：随着对象的创建，会在对空间中分配实例变量空间，并进行默认赋值</li>
-</ul>
-</li>
-<li>局部变量：在使用前，必须进行显式赋值。否则编译不通过</li>
-</ol>
-</li>
-</ul>
+            <div class="admonition-content"><pre><code>变量的分类：  
+* 按照数据类型分：1. 基本数据类型 2. 引用数据类型  
+* 按照在类中声明的位置分：  
+    1. 成员变量：在使用前，都经历过默认初始化赋值  
+        * 类变量：linking的prepare阶段：给类变量默认赋值 ---&gt; initial阶段：给类变量显式赋值即静态代码块赋值  
+        * 实例变量：随着对象的创建，会在对空间中分配实例变量空间，并进行默认赋值  
+    2. 局部变量：在使用前，必须进行显式赋值。否则编译不通过
+</code></pre>
 </div>
         </div>
     </div>
@@ -724,13 +717,26 @@ Demo:
             <i class="icon fas fa-pencil-alt fa-fw"></i>补充说明<i class="details-icon fas fa-angle-right fa-fw"></i>
         </div>
         <div class="details-content">
-            <div class="admonition-content"><ul>
-<li>在栈帧中，与性能调优关系最密切的部分就是局部变量表。在方法执行时，虚拟机使用局部变量表完成方法的传递。如果局部变量表中的变量不存在了，指向堆空间的指针也就不存在了，那么堆中垃圾就需要被回收</li>
-<li><strong>局部变量表中的变量也是重要的垃圾回收根节点，只要被局部变量表中直接或间接引用的对象都不会被回收</strong></li>
-</ul>
+            <div class="admonition-content"><pre><code>1. 在栈帧中，与性能调优关系最密切的部分就是局部变量表。在方法执行时，虚拟机使用局部变量表完成方法的传递。如果局部变量表中的变量不存在了，指向堆空间的指针也就不存在了，那么堆中垃圾就需要被回收  
+2. 局部变量表中的变量也是重要的垃圾回收根节点，只要被局部变量表中直接或间接引用的对象都不会被回收
+</code></pre>
 </div>
         </div>
     </div>
+</li>
+</ul>
+<h5 id="操作数栈operand-stack">操作数栈(Operand Stack)</h5>
+<ul>
+<li>每个独立的栈帧中除了包含局部变量表以外，还包含一个后进先出的操作数栈，也可以成为表达式栈。</li>
+<li>主要用于保存计算过程的中间结果，同时作为计算过程中变量临时的存储空间。</li>
+<li>如果被调用的方法带有返回值，其返回值将会被压入当前栈帧的操作数栈中，并更新PC寄存器下一条需要执行的字节码指令。</li>
+<li>一个方法刚开始执行时，栈帧被创建，随之这个方法的操作数栈也被创建，但为空。且最大深度在编译期就定义好了。</li>
+<li>操作数栈<strong>并非采用访问索引的方式来进行数据访问</strong>，只能通过push和pop来操作，因为它是个<strong>栈</strong>，但是它是由数组实现的。</li>
+<li>Java虚拟机的届时引擎是基于栈的执行引擎，其中栈指的就是操作数栈。</li>
+</ul>
+<h4 id="栈顶缓存技术tos-top-of-stack-cashing">栈顶缓存技术(ToS, Top-of-Stack Cashing)</h4>
+<p>基于栈式架构的虚拟机所使用的零地址指令更加紧凑，但完成一项操作的时候必然需要使用更多的入栈和出栈操作，使得需要更多的指令分派次数和内存读写此时。<br>
+HotSpot JVM提出栈顶缓存技术(ToS, Top-of-Stack Cashing)，<strong>将栈顶元素全部缓存在物理CPU的寄存器中，以此降低对内存的读写次数，提升执行引擎的执行效率</strong>。</p>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
@@ -754,7 +760,8 @@ Demo:
         </section>
     </div>
 
-    <div class="post-nav"><a href="/posts/java_basic/" class="prev" rel="prev" title="Java基础"><i class="fas fa-angle-left fa-fw"></i>Java基础</a></div>
+    <div class="post-nav"><a href="/posts/java_basic/" class="prev" rel="prev" title="Java基础"><i class="fas fa-angle-left fa-fw"></i>Java基础</a>
+            <a href="/posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="next" rel="next" title="Java多线程">Java多线程<i class="fas fa-angle-right fa-fw"></i></a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.

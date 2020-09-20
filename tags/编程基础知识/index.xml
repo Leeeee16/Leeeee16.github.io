@@ -3,7 +3,14 @@
         <title>编程基础知识 - 标签 - 樂樂阿</title>
         <link>https://Leeeee16.github.io/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/</link>
         <description>编程基础知识 - 标签 - 樂樂阿</description>
-        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Wed, 08 Jul 2020 11:33:55 &#43;0800</lastBuildDate><atom:link href="https://Leeeee16.github.io/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="self" type="application/rss+xml" /><item>
+        <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Sun, 20 Sep 2020 14:09:18 &#43;0800</lastBuildDate><atom:link href="https://Leeeee16.github.io/tags/%E7%BC%96%E7%A8%8B%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86/" rel="self" type="application/rss+xml" /><item>
+    <title>Java多线程</title>
+    <link>https://Leeeee16.github.io/posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/</link>
+    <pubDate>Sun, 20 Sep 2020 14:09:18 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://Leeeee16.github.io/posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/</guid>
+    <description><![CDATA[线程的三种创建方式： 继承Thread类 自定义线程类继承Thread类 重写run()方法，编写线程执行体 创建线程对象，调用start()方法启]]></description>
+</item><item>
     <title>Java基础</title>
     <link>https://Leeeee16.github.io/posts/java_basic/</link>
     <pubDate>Wed, 08 Jul 2020 11:33:55 &#43;0800</pubDate>
