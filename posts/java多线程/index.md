@@ -24,18 +24,29 @@
     * 关闭服务：`ser.shutdownNow();`  
     > 可以定义返回值  
     > 可以抛出异常
+    * Callable接口与Runnable接口区别？  
+        1. Callable有返回值，Runnable没有  
+        2. Callable抛异常，Runnable没有  
+        3. 落地方法不一样，Callable是call()，Runnable是run()
+    * get方法一般请放在最后一行  
   
 ## Lambda表达式  
 1. 为什么使用Lambda表达式？  
     避免匿名内部类定义过多；简化代码；去掉无意义代码，只留核心的逻辑。  
 2. 理解函数式接口(Functional Interface)  
-    * 任何接口，如果只包含唯一一个抽象方法，那么它就是一个函数式接口。  
+    * 任何接口，如果只包含唯一一个抽象方法，那么它就是一个函数式接口。允许存在default  
     ```java
+        @FunctionalInterface  
         public interface Runnable{
             public abstract void run();
         }
     ```  
     * 对于函数式接口，可以通过lambda表达式来创建该接口的对象。  
+
+3. Lambda格式  
+    * (....) -> { 具体实现 };  
+    小括号直接copy  
+* Demo1  
     ```java
     package com.demo.lambda;
 
@@ -99,6 +110,53 @@
         }
     }
     ```  
+* Demo2  
+    ```java
+    @FunctionalInterface
+    interface Foo {
+        //    public void sayHello();
+        public int add(int a, int b);
+
+        default int div(int x, int y) {
+            System.out.println("****div*****");
+            return x / y;
+        }
+
+        public static int mul(int x, int y) {
+            return x * y;
+        }
+
+    }
+
+
+    public class LambdaExpressDemo {
+        public static void main(String[] args) {
+    /*        Foo foo = new Foo() {
+                @Override
+                public void sayHello() {
+                    System.out.println("******hello******");
+                }
+            };
+            foo.sayHello();*/
+    //        Foo foo = () -> {
+    //            System.out.println("****hello****");
+    //        };
+    //        foo.sayHello();
+            Foo foo = (int a, int b) -> {
+                return a + b;
+            };
+            System.out.println("a + b = " + foo.add(3, 6));
+            System.out.println(foo.div(10, 5));
+            System.out.println(Foo.mul(4, 9));  // Foo.mul 类方法
+        }
+    }
+    /*
+        a + b = 9
+        ****div*****
+        2
+        36
+    */
+    ```
 
 ## 静态代理模式  
 * 静态代理模式总结：
@@ -169,6 +227,10 @@ class WeddingCompany implements Marry{
 * sleep存在异常InterruptedException  
 * sleep时间达到后线程进入就绪状态  
 * 每一个对象都有一个锁，sleep不会释放锁  
+
+{{< admonition type=msg title="sleep与wait区别" open=true >}}
+都是当前线程暂停，wait会让线程释放手中的锁，sleep不会释放锁
+{{< /admonition >}}
 
 ## 线程礼让  
 * 让当前正在执行的线程暂停，但不阻塞  
@@ -426,5 +488,420 @@ class MyThread implements Runnable {
 // pool-1-thread-3
 // pool-1-thread-2
 ```
+  
+## 生产者消费者案例  
+题目：两个线程，操作一个初始值为0的变量  
+    实现一个线程对该变量加1，一个线程对该变量减1  
+    实现交替，来10轮，变量初始值为0  
 
+1. 高聚合低耦合，线程操作资源类
+2. 判断/干活/通知
+3. 多线程交互中，必须要防止多线程的虚假唤醒，即判断用while，别用if  
+> Demo注释部分为synchronized版本，新的为使用lock的版本
+```java
+package com.demo.thread;
+
+
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+class Temperature {
+    private int number = 0;
+    private Lock lock = new ReentrantLock();
+    private Condition condition = lock.newCondition();
+
+    public void increment() throws InterruptedException{
+        lock.lock();
+        try{
+            // 1. 判断
+            while (number != 0) {
+                condition.await(); //this.wait();
+            }
+            // 2. 干活
+            number++;
+            System.out.println(Thread.currentThread().getName() + "\t" + number);
+            // 3. 通知
+            condition.signalAll(); //this.notifyAll();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            lock.unlock();
+        }
+    }
+
+    public void decrement() throws InterruptedException{
+        lock.lock();
+        try{
+            // 1. 判断
+            while (number == 0) {
+                condition.await(); //this.wait();
+            }
+            // 2. 干活
+            number--;
+            System.out.println(Thread.currentThread().getName() + "\t" + number);
+            // 3. 通知
+            condition.signalAll(); //this.notifyAll();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            lock.unlock();
+        }
+    }
+
+/*    public synchronized void increment() throws InterruptedException {
+        // 1. 判断
+        while (number != 0) {
+            this.wait();
+        }
+        // 2. 干活
+        number++;
+        System.out.println(Thread.currentThread().getName() + "\t" + number);
+        // 3. 通知
+        this.notifyAll();
+
+    }*/
+
+    /*public synchronized void decrement() throws InterruptedException {
+        while (number == 0) {
+            this.wait();
+        }
+        number--;
+        System.out.println(Thread.currentThread().getName() + "\t" + number);
+        this.notifyAll();
+    }*/
+
+}
+
+/**
+ * 两个线程，操作一个初始值为0的变量
+ * 实现一个线程对该变量加1，一个线程对该变量减1
+ * 实现交替，来10轮，变量初始值为0
+ * <p>
+ * 1. 高聚合低耦合，线程操作资源类
+ * 2. 判断/干活/通知
+ * 3. 多线程交互中，必须要防止多线程的虚假唤醒，即判断用while，别用if
+ */
+
+public class ThreadWaitNotifyDemo {
+    public static void main(String[] args) {
+        Temperature temperature = new Temperature();
+
+        new Thread(()->{
+            for (int i = 0; i < 10; i++) {
+                try {
+                    Thread.sleep(200);
+                    temperature.increment();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        },"A").start();
+
+        new Thread(()->{
+            for (int i = 0; i < 10; i++) {
+                try {
+                    Thread.sleep(200);
+                    temperature.decrement();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        },"B").start();
+
+        new Thread(()->{
+            for (int i = 0; i < 10; i++) {
+                try {
+                    Thread.sleep(100);
+                    temperature.increment();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        },"C").start();
+
+        new Thread(()->{
+            for (int i = 0; i < 10; i++) {
+                try {
+                    Thread.sleep(300);
+                    temperature.decrement();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        },"D").start();
+    }
+}
+
+```  
+
+## 精准通知和唤醒，顺序访问Demo  
+题目：多线程之间按顺序调用，实现 A -> B -> C  
+    三个线程启动，要求如下：  
+    AA打印5次，BB打印10次，CC打印15次  
+    接着  
+    AA打印5次，BB打印10次，CC打印15次  
+    ......来10轮  
+> **注意标志位的修改和定位**  
+> 该案例体现出了Lock和Condition的优点，synchronized无法做到
+```java
+package com.demo.thread;
+
+
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
+class ShareResource {
+    private int number = 1; // 1A  2:B  3:C
+    private Lock lock = new ReentrantLock();
+    private Condition condition1 = lock.newCondition();
+    private Condition condition2 = lock.newCondition();
+    private Condition condition3 = lock.newCondition();
+
+    public void print5() {
+        lock.lock();
+        try {
+            //1.判断
+            while (number != 1) {
+                condition1.await();
+            }
+            //2.干活
+            for (int i = 1; i <= 5; i++) {
+                System.out.println(Thread.currentThread().getName() + "\t" + i);
+            }
+            //3.通知
+            number = 2;
+            condition2.signal();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public void print10() {
+        lock.lock();
+        try {
+            //1.判断
+            while (number != 2) {
+                condition2.await();
+            }
+            //2.干活
+            for (int i = 1; i <= 10; i++) {
+                System.out.println(Thread.currentThread().getName() + "\t" + i);
+            }
+            //3.通知
+            number = 3;
+            condition3.signal();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+
+    public void print15() {
+        lock.lock();
+        try {
+            //1.判断
+            while (number != 3) {
+                condition3.await();
+            }
+            //2.干活
+            for (int i = 1; i <= 15; i++) {
+                System.out.println(Thread.currentThread().getName() + "\t" + i);
+            }
+            //3.通知
+            number = 1;
+            condition1.signal();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            lock.unlock();
+        }
+    }
+}
+
+
+/**
+ * 多线程之间按顺序调用，实现 A -> B -> C
+ * 三个线程启动，要求如下：
+ * AA打印5次，BB打印10次，CC打印15次
+ * 接着
+ * AA打印5次，BB打印10次，CC打印15次
+ * ......来10轮
+ * <p>
+ * 1. 高聚合低耦合，线程操作资源类
+ * 2. 判断/干活/通知
+ * 3. 多线程交互中，必须要防止多线程的虚假唤醒，即判断用while，别用if
+ * 4. 注意标志位的修改和定位
+ */
+public class ThreadOrderAccess {
+    public static void main(String[] args) {
+        ShareResource shareResource = new ShareResource();
+
+        new Thread(()->{
+            for (int i = 0; i < 10; i++) {
+                shareResource.print5();
+            }
+        },"AA").start();
+
+        new Thread(()->{
+            for (int i = 0; i < 10; i++) {
+                shareResource.print10();
+            }
+        },"BB").start();
+
+        new Thread(()->{
+            for (int i = 0; i < 10; i++) {
+                shareResource.print15();
+            }
+        },"CC").start();
+    }
+}
+```  
+
+## 线程8锁  
+1. 标准访问，先打印邮件还是短信？？   
+2. 邮件方法暂停4秒，先打印邮件还是短信？？  
+> * 一个对象里面如果有多个synchronized方法，某一时刻内，只要一个线程去调用其中的一个synchronized方法了，其他的线程都只能等待，换句话说，某一时刻内，只能有唯一一个线程去访问这些synchronized方法  
+> * 锁的是当前对象this，被锁定后，其他线程都不能进入到当前对象的其他的synchronized方法  
+3. 新增一个普通方法hello()，先打印邮件，还是hello  
+4. 两部手机，先打印邮件还是短信？？  
+> 加个普通方法后和同步锁无关  
+> 换成两个对象后，不是同一把锁了
+5. 两个静态同步方法，同一部手机，请问先打印邮件还是短信？  
+6. 两个静态同步方法，两部手机，请问先打印邮件还是短信？  
+> synchronized实现同步的基础：Java中的每一个对象都可以作为锁  
+> 对于普通同步方法，锁的是当前实例对象  
+> 对于同步方法块，锁的是synchronized括号里配置的对象  
+> 对于静态同步方法，锁的是当前类的Class对象  
+7. 1个静态同步方法，一个普通同步方法，一部手机，请问先打印邮件还是短信？  
+8. 1个静态同步方法，一个普通同步方法，两部手机，请问先打印邮件还是短信？  
+> * 当一个线程试图访问同步代码块是，它首先必须得到锁，退出或抛出异常时必须释放锁。  
+> * 也就是说如果一个实例对象的非静态同步方法获取锁后，该实例对象的其他非静态方法必须等待获取锁的方法释放锁后，才能获取锁。  
+> * 别的实例对象的非静态同步方法因为跟该实例对象的非静态同步方法用的是不同的锁，所以不用等待该实例对象释放锁，就可以获取他们自己的锁。  
+> * 所有的静态同步方法用的也是同一把锁，即类对象本身  
+> * **这两把锁是两个不同的对象**，所以静态同步方法与非静态同步方法之间不会有竞争条件的  
+> * 一旦一个静态同步方法获取锁后，其他的静态同步方法都必须等待该方法释放锁，才能获得锁。不管是同一个实例对象的静态同步方法之间，还是不同的实例对象的静态同步方法之间，只要他们是同一个类的实例对象。  
+
+## list不安全  
+1. 故障现象  
+    `java.util.ConcurrentModificationException`(并发修改异常)  
+2. 导致原因  
+    ArrayList线程不安全,add方法没有加synchronized
+3. 解决方案  
+    3.1 使用Vector，Vector线程安全，add方法有synchronized
+    3.2 `Collections.synchronizedList(new ArrayList<>())`  
+    3.3 `new CopyOnWriteArrayList<>();`
+4. 优化建议（同样的错误，不出现第二次）  
+  
+* 写时复制：CopyOnWrite容器即写时复制的容器。往一个容器添加元素的时候，不直接往当前容器object[\]添加，而是现将当前容器object[\]进行Copy，复制出一个新的容器object[\] newElements,然后新的容器object[\] newElements里添加元素，添加完之后，再将2元容器的引用指向新的容器setArray(newElements);。这样做的好处是可以对CopyOnWrite容器进行并发的读，而不需要加锁，因为当前容器不会添加任何元素，所以CopyOnWrite容器也是一种读写分离的思想，读和写不同的容器。
+```java
+    // CopyOnWriteArrayList，Add方法源码
+    public boolean add(E var1) {
+        ReentrantLock lock = this.lock;
+        lock.lock();
+
+        boolean var6;
+        try {
+            Object[] elements = this.getArray();
+            int len = elements.length;
+            Object[] newElements = Arrays.copyOf(elements, len + 1);
+            newElements[len] = var1;
+            this.setArray(var5);
+            var6 = true;
+        } finally {
+            lock.unlock();
+        }
+
+        return var6;
+    }
+```  
+
+## CountDownLatch  
+* 主要有两个方法，当一个或多个线程调用await方法时，这些线程会阻塞  
+* 其他线程调用countDown方法会将计数器减1(调用countDown方法的线程不会阻塞)  
+* 当计数器的值变为0时，因await方法阻塞的线程会被唤醒，继续执行  
+
+```java
+package com.demo.thread;
+
+import java.util.concurrent.CountDownLatch;
+
+/**
+ * @author: lqy
+ * @create: 2020/9/23
+ * @description: CountDownLatchDemo
+ */
+public class CountDownLatchDemo {
+    public static void main(String[] args) throws InterruptedException {
+        CountDownLatch countDownLatch = new CountDownLatch(6);
+        for (int i = 1; i <= 6; i++) {
+            new Thread(() -> {
+                System.out.println(Thread.currentThread().getName() + "\t离开教室");
+                countDownLatch.countDown();
+            }, String.valueOf(i)).start();
+        }
+        countDownLatch.await();
+        System.out.println(Thread.currentThread().getName() + "\t班长关门走人");
+    }
+
+    public static void closeDoor() {
+        for (int i = 1; i <= 6; i++) {
+            new Thread(() -> {
+                System.out.println(Thread.currentThread().getName() + "\t离开教室");
+            }, String.valueOf(i)).start();
+        }
+        System.out.println(Thread.currentThread().getName() + "\t班长关门走人");
+    }
+}
+
+```  
+
+## CyclicBarrier  
+* 与CountDownLatch相反，做加法
+```java
+package com.demo.thread;
+
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+
+/**
+ * @author: lqy
+ * @create: 2020/9/23
+ * @description: CyclicBarrierDemo
+  */
+public class CyclicBarrierDemo {
+    public static void main(String[] args) {
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(7,()->{
+            System.out.println("***召唤神龙*****");
+        });
+
+        for (int i = 1; i <= 7; i++) {
+            final int tempInt = i;
+            new Thread(()->{
+                System.out.println(Thread.currentThread().getName()+"\t收集到第"+tempInt+"颗龙珠");
+                try {
+                    cyclicBarrier.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (BrokenBarrierException e) {
+                    e.printStackTrace();
+                }
+            },String.valueOf(i)).start();
+        }
+
+
+    }
+}
+```  
+
+## Semaphore  
+* 信号量两种操作：  
+    * acquire：当一个线程调用acquire操作时，它要么通过成功获取信号量（信号量减1），要么一直等下去，直到有线程释放信号量，或超时  
+    * release：实际上会将信号量加1，然后唤醒等待的线程  
+* 信号量用于多个共享资源的互斥使用；用于并发线程数的控制  
+  
 
