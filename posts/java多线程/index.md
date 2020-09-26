@@ -447,47 +447,6 @@ class TestLock2 implements Runnable {
 | wait(long timeout) | 指定等待的毫秒数 |
 | notify() | 唤醒一个处于等待状态的线程  |
 | notifyAll() | 唤醒同一个对象上所有调用wait()方法的线程，优先级别高的线程优先调度 |  
-
-## 线程池  
-* 提前创建好多个线程，放入线程池中，使用时直接获取，使用后放回池中。提高性能  
-* **好处**：便于线程管理  
-* ExecutorService：真正的线程池接口。常见子类ThreadPoolExecutor  
-    * void execute(Runnable command):执行任务/命令，没有返回值，一般用来执行Runnable  
-    * <T> Future<T> submit(Callable<T> task)：执行任务，没有返回值，一般用来执行Callable  
-    * void shutdown():关闭连接池  
-```java
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-public class TestPool {
-    public static void main(String[] args) {
-        //1. 创建线程池
-        //newFixedThreadPool 参数为：线程池的大小
-        ExecutorService service = Executors.newFixedThreadPool(10);
-
-        //执行
-        service.execute(new MyThread());
-        service.execute(new MyThread());
-        service.execute(new MyThread());
-        service.execute(new MyThread());
-
-        //2. 关闭链接
-        service.shutdown();
-    }
-}
-
-class MyThread implements Runnable {
-
-    @Override
-    public void run() {
-        System.out.println(Thread.currentThread().getName());
-    }
-}
-//pool-1-thread-1
-// pool-1-thread-4
-// pool-1-thread-3
-// pool-1-thread-2
-```
   
 ## 生产者消费者案例  
 题目：两个线程，操作一个初始值为0的变量  
@@ -904,4 +863,183 @@ public class CyclicBarrierDemo {
     * release：实际上会将信号量加1，然后唤醒等待的线程  
 * 信号量用于多个共享资源的互斥使用；用于并发线程数的控制  
   
+## ReadWriteLock  
+* 多个线程同时读一个资源类没有任何问题，所以为了满足并发量，读取共享资源应该可以同时进行。  
+* 但是，如果有一个线程想去写共享资源，就不应该再有其他线程可以对该线程进行读写  
+```java
+package com.demo.JUC;
+
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+
+class MyCache {
+    private volatile Map<String, Object> map = new HashMap<>();
+    private ReadWriteLock readWriteLock = new ReentrantReadWriteLock();
+
+    public void put(String key, Object value) {
+        readWriteLock.writeLock().lock();
+        try {
+            System.out.println(Thread.currentThread().getName() + "\t写入数据" + key);
+            try {
+                TimeUnit.MILLISECONDS.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            map.put(key, value);
+            System.out.println(Thread.currentThread().getName() + "\t写入完成");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            readWriteLock.writeLock().unlock();
+        }
+    }
+
+    public void get(String key) {
+        readWriteLock.readLock().lock();
+        try {
+            System.out.println(Thread.currentThread().getName() + "\t读取数据");
+            try {
+                TimeUnit.MILLISECONDS.sleep(300);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            Object result = map.get(key);
+            System.out.println(Thread.currentThread().getName() + "\t读取成功" + result);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            readWriteLock.readLock().unlock();
+        }
+    }
+}
+
+/**
+ * @author: lqy
+ * @create: 2020/9/24
+ * @description: ReadWriteLockDemo
+ */
+public class ReadWriteLockDemo {
+    public static void main(String[] args) {
+        MyCache myCache = new MyCache();
+
+        for (int i = 1; i < 5; i++) {
+            final int tempInt = i;
+            new Thread(() -> {
+                myCache.put(tempInt + "", tempInt + "");
+            }, String.valueOf(i)).start();
+        }
+
+        for (int i = 1; i < 5; i++) {
+            final int tempInt = i;
+            new Thread(() -> {
+                myCache.get(tempInt + "");
+            }, String.valueOf(i)).start();
+        }
+    }
+}
+ 
+```  
+
+## BlockingQueue  
+* 阻塞队列：当队列为空，从队列中**获取**元素的操作将会被阻塞；当队列为满的，从队列中**添加**元素的操作将会被阻塞。  
+* 作用：不需要关心什么时候需要阻塞线程，什么时候需要唤醒线程  
+* ArrayBlockingQueue:由数组结构组成的有界阻塞队列  
+* LinkedBlockingQueue：由链表结构组成的有界（但大小默认值为integer.MAX_VALUE）阻塞队列  
+* synchronousQueue：不存储元素的阻塞队列，也即单个元素队列  
+
+| 方法类型 | 抛出异常 | 特殊值 | 阻塞 | 超时 |
+| ----- | ----- | ---- | --- | --- |
+| 插入 | add(e) | offer(e) | put(e) | offer(e,time,unit) |
+| 移除 | remove() | poll() | take() | pull(time,unit)|
+| 检查 | element() | peek() | 不可用 | 不可用 |  
+
+* 抛出异常：当阻塞队列满时，再往队列里add插入元素，会抛出IllegalStateException:Queue full  
+当阻塞队列空时，再往队列里remove移除元素会抛出NoSuchElementException  
+* 特殊值：插入方法，成功true,失败false  
+移除方法，成功返回出队列的元素，队列里没有就返回null  
+* 一直阻塞：当阻塞队列满时，生产者线程继续往队列里put元素，队列会一直阻塞生产者线程直到put数据or响应中断退出  
+当阻塞队列空时，消费者线程试图从队列里take元素，队列会一直阻塞消费者线程直到队列可用  
+* 超时退出：当阻塞队列满时，队列会阻塞生产者线程一定时间，超过限时后生产者线程会退出  
+  
+## 线程池  
+* 优势：控制运行的线程数量，处理过程中将任务放入队列，然后在线程创建后启动这些任务，如果线程数量超过了最大数量，超出数量的线程排队等候，等其他线程执行完毕，再从队列中取出任务来执行。  
+* 特点：线程服用；控制最大并发量；管理线程  
+* 降低资源消耗；提高响应速度；提高线程的可管理性。  
+* 使用：  
+    * Executors.newFixedThreadPool(int):执行长期任务性能好，创建一个线程池，一池有N个固定的线程，有固定线程数的线程  
+    * Executors.newSingleThreadExecutor():一个任务一个任务地执行，一池一线程  
+    * Executors.newCachedThreadPool():执行很多短期异步任务，线程池根据需要创建新线程，但在先前构建的线程可用时将重用他们。可扩容。  
+* 线程池底层：ThreadPoolExecutor类  
+![](https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/dataThreadPooldiceng.png)  
+* 七大参数：
+    1. corePoolSize：线程池中的常驻核心线程数  
+    2. maximumPoolSize：线程池中能够容纳同时执行的最大线程数，此值必须大于等于1  
+    3. KeepAliveTime：多余的空闲线程的存活时间。当前池中线程数量超过corePoolSize时，当空闲时间达到KeepAliveTime时，多余线程会被销毁，直到只剩下corePoolSize个线程为止  
+    4. unit：KeepAliveTime的单位  
+    5. workQueue：任务队列，被提交但尚未被执行的任务  
+    6. threadFactory：表示生成线程池中工作线程的线程工厂，用于创建线程，一般默认的即可  
+    7. handler：拒绝策略，表示当队列满了，并且工作线程大于等于线程池的最大线程数（maximumPoolSize）时如何来拒绝请求执行的runnable的策略  
+    * 源码：  
+    ```java
+    public ThreadPoolExecutor(int corePoolSize,
+                                int maximumPoolSize,
+                                long keepAliveTime,
+                                TimeUnit unit,
+                                BlockingQueue<Runnable> workQueue,
+                                ThreadFactory threadFactory,
+                                RejectedExecutionHandler handler) {
+            if (corePoolSize < 0 ||
+                maximumPoolSize <= 0 ||
+                maximumPoolSize < corePoolSize ||
+                keepAliveTime < 0)
+                throw new IllegalArgumentException();
+            if (workQueue == null || threadFactory == null || handler == null)
+                throw new NullPointerException();
+            this.acc = System.getSecurityManager() == null ?
+                    null :
+                    AccessController.getContext();
+            this.corePoolSize = corePoolSize;
+            this.maximumPoolSize = maximumPoolSize;
+            this.workQueue = workQueue;
+            this.keepAliveTime = unit.toNanos(keepAliveTime);
+            this.threadFactory = threadFactory;
+            this.handler = handler;
+        }
+    ```  
+
+* 线程池的拒绝策略：  
+    * 等待队列满了，线程池中的工作线程数也达到了最大，无法继续为新任务服务。这时候就需要拒绝策略机制来处理这个问题。  
+    * JDK内置4中拒绝策略：  
+        1. AbortPolicy（默认）：直接抛出RejectedExecutionException异常阻止系统正常运行  
+        2. CallerRunsPolicy：“调用者运行”，一种调节机制，该策略既不会抛弃任务，也不会抛出异常，而是将某些任务回退到调用者，从而降低新任务的流量  
+        3. DiscardOldestPolicy：抛弃队列中等待最久的任务，然后把当前任务加入到队列中尝试再次提交当前任务  
+        4. DiscardPolicy：该策略默默地丢弃无法处理的任务，不予任何处理也不抛出异常。如果允许任务丢失，可以使用此策略。
+
+* 线程池底层工作原理：  
+    1. 在创建了线程池后，开始等待请求  
+    2. 当调用execute()方法添加一个请求任务时，线程池会做出如下判断：  
+        2.1 如果正在运行的线程数量小于corePoolSize，那么马上创建线程运行这个任务；  
+        2.2 如果正在运行的线程数量大于或等于corePoolSize，那么**入队**  
+        2.3 如果这个时候队列满了，且正在运行的线程数量还小于maximumPoolSize，那么还是要创建非核心线程立刻执行次任务（相当于扩容）  
+        2.4 如果队列满了且正在运行的线程数大于或等于maximumPoolSize，则**启动饱和拒绝策略**来处理  
+    3. 当一个线程完成任务时，他会从队列中取下一个任务来执行  
+    4. 当一个线程无事可做超过一定的时间（KeepAliveTime）时，线程会判断：  
+        如果当前运行的线程数大于corePoolSize，那么这个线程就被停掉；  
+        所有线程池的任务完成后，线程数会收缩到corePoolSize的大小。
+      
+{{< admonition type=warning title="注意" >}}
+**线程池不允许使用Executors去创建，而是通过ThreadPoolExecutor的方式！！**
+{{< /admonition >}}
+* 这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。  
+**说明**：Executors 返回的线程池对象的弊端如下：  
+    1. FixedThreadPool和SingleThreadPool：  
+        允许的请求队列长度为Integer.MAX_VALUE，可能会堆积大量的请求，从而导致OOM。  
+    2. CachedThreadPool：  
+        允许创建线程数量为Integer.MAX_VALUE，可能会堆积大量的请求，从而导致OOM。  
+
+* 线程池最大容纳数：maximumPoolSize + 队列长度  
 

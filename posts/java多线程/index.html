@@ -11,7 +11,7 @@
 <meta property="og:url" content="https://Leeeee16.github.io/posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" />
 <meta property="og:image" content="https://Leeeee16.github.io/logo.png"/>
 <meta property="article:published_time" content="2020-09-20T14:09:18+08:00" />
-<meta property="article:modified_time" content="2020-09-23T22:13:00+08:00" /><meta property="og:site_name" content="樂樂阿" />
+<meta property="article:modified_time" content="2020-09-26T15:50:00+08:00" /><meta property="og:site_name" content="樂樂阿" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://Leeeee16.github.io/logo.png"/>
 
@@ -29,8 +29,8 @@
         "mainEntityOfPage": {
             "@type": "WebPage",
             "@id": "https:\/\/Leeeee16.github.io\/posts\/java%E5%A4%9A%E7%BA%BF%E7%A8%8B\/"
-        },"image": ["https:\/\/Leeeee16.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Java, 编程基础知识","wordcount":  8018 ,
-        "url": "https:\/\/Leeeee16.github.io\/posts\/java%E5%A4%9A%E7%BA%BF%E7%A8%8B\/","datePublished": "2020-09-20T14:09:18+08:00","dateModified": "2020-09-23T22:13:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+        },"image": ["https:\/\/Leeeee16.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "Java, 编程基础知识","wordcount":  10508 ,
+        "url": "https:\/\/Leeeee16.github.io\/posts\/java%E5%A4%9A%E7%BA%BF%E7%A8%8B\/","datePublished": "2020-09-20T14:09:18+08:00","dateModified": "2020-09-26T15:50:00+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/Leeeee16.github.io\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -106,8 +106,8 @@
             <div class="toc-content" id="toc-content-auto"></div>
         </div><article class="page single"><h1 class="single-title animated flipInX">Java多线程</h1><div class="post-meta">
             <div class="post-meta-line"><span class="post-author"><a href="/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>lele</a></span>&nbsp;<span class="post-category">收录于 <a href="/categories/java/"><i class="far fa-folder fa-fw"></i>Java</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-20">2020-09-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 8018 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 17 分钟&nbsp;<span id="/posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="leancloud_visitors" data-flag-title="Java多线程">
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-09-20">2020-09-20</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 10508 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 21 分钟&nbsp;<span id="/posts/java%E5%A4%9A%E7%BA%BF%E7%A8%8B/" class="leancloud_visitors" data-flag-title="Java多线程">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -129,7 +129,6 @@
     <li><a href="#死锁">死锁</a></li>
     <li><a href="#lock锁">Lock(锁)</a></li>
     <li><a href="#线程协作">线程协作</a></li>
-    <li><a href="#线程池">线程池</a></li>
     <li><a href="#生产者消费者案例">生产者消费者案例</a></li>
     <li><a href="#精准通知和唤醒顺序访问demo">精准通知和唤醒，顺序访问Demo</a></li>
     <li><a href="#线程8锁">线程8锁</a></li>
@@ -137,6 +136,9 @@
     <li><a href="#countdownlatch">CountDownLatch</a></li>
     <li><a href="#cyclicbarrier">CyclicBarrier</a></li>
     <li><a href="#semaphore">Semaphore</a></li>
+    <li><a href="#readwritelock">ReadWriteLock</a></li>
+    <li><a href="#blockingqueue">BlockingQueue</a></li>
+    <li><a href="#线程池">线程池</a></li>
   </ul>
 </nav></div>
             </div><div class="content" id="content"><h2 id="线程的三种创建方式">线程的三种创建方式：</h2>
@@ -1013,87 +1015,7 @@ synchronized方法控制对“对象”的访问，每个对象对应一把锁�
 </tr>
 </tbody>
 </table>
-<h2 id="线程池">线程池</h2>
-<ul>
-<li>提前创建好多个线程，放入线程池中，使用时直接获取，使用后放回池中。提高性能</li>
-<li><strong>好处</strong>：便于线程管理</li>
-<li>ExecutorService：真正的线程池接口。常见子类ThreadPoolExecutor
-<ul>
-<li>void execute(Runnable command):执行任务/命令，没有返回值，一般用来执行Runnable</li>
-<li><T> Future<T> submit(Callable<T> task)：执行任务，没有返回值，一般用来执行Callable</li>
-<li>void shutdown():关闭连接池</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">import</span> <span class="nn">java.util.concurrent.ExecutorService</span><span class="o">;</span>
-<span class="kn">import</span> <span class="nn">java.util.concurrent.Executors</span><span class="o">;</span>
-
-<span class="kd">public</span> <span class="kd">class</span> <span class="nc">TestPool</span> <span class="o">{</span>
-    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
-        <span class="c1">//1. 创建线程池
-</span><span class="c1"></span>        <span class="c1">//newFixedThreadPool 参数为：线程池的大小
-</span><span class="c1"></span>        <span class="n">ExecutorService</span> <span class="n">service</span> <span class="o">=</span> <span class="n">Executors</span><span class="o">.</span><span class="na">newFixedThreadPool</span><span class="o">(</span><span class="n">10</span><span class="o">);</span>
-
-        <span class="c1">//执行
-</span><span class="c1"></span>        <span class="n">service</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">MyThread</span><span class="o">());</span>
-        <span class="n">service</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">MyThread</span><span class="o">());</span>
-        <span class="n">service</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">MyThread</span><span class="o">());</span>
-        <span class="n">service</span><span class="o">.</span><span class="na">execute</span><span class="o">(</span><span class="k">new</span> <span class="n">MyThread</span><span class="o">());</span>
-
-        <span class="c1">//2. 关闭链接
-</span><span class="c1"></span>        <span class="n">service</span><span class="o">.</span><span class="na">shutdown</span><span class="o">();</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-
-<span class="kd">class</span> <span class="nc">MyThread</span> <span class="kd">implements</span> <span class="n">Runnable</span> <span class="o">{</span>
-
-    <span class="nd">@Override</span>
-    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">run</span><span class="o">()</span> <span class="o">{</span>
-        <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">());</span>
-    <span class="o">}</span>
-<span class="o">}</span>
-<span class="c1">//pool-1-thread-1
-</span><span class="c1">// pool-1-thread-4
-</span><span class="c1">// pool-1-thread-3
-</span><span class="c1">// pool-1-thread-2
-</span></code></pre></td></tr></table>
-</div>
-</div><h2 id="生产者消费者案例">生产者消费者案例</h2>
+<h2 id="生产者消费者案例">生产者消费者案例</h2>
 <p>题目：两个线程，操作一个初始值为0的变量<br>
 实现一个线程对该变量加1，一个线程对该变量减1<br>
 实现交替，来10轮，变量初始值为0</p>
@@ -1890,11 +1812,375 @@ ArrayList线程不安全,add方法没有加synchronized</li>
 </li>
 <li>信号量用于多个共享资源的互斥使用；用于并发线程数的控制</li>
 </ul>
+<h2 id="readwritelock">ReadWriteLock</h2>
+<ul>
+<li>多个线程同时读一个资源类没有任何问题，所以为了满足并发量，读取共享资源应该可以同时进行。</li>
+<li>但是，如果有一个线程想去写共享资源，就不应该再有其他线程可以对该线程进行读写</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kn">package</span> <span class="nn">com.demo.JUC</span><span class="o">;</span>
+
+
+<span class="kn">import</span> <span class="nn">java.util.HashMap</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Map</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.TimeUnit</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.locks.ReadWriteLock</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.concurrent.locks.ReentrantReadWriteLock</span><span class="o">;</span>
+
+<span class="kd">class</span> <span class="nc">MyCache</span> <span class="o">{</span>
+    <span class="kd">private</span> <span class="kd">volatile</span> <span class="n">Map</span><span class="o">&lt;</span><span class="n">String</span><span class="o">,</span> <span class="n">Object</span><span class="o">&gt;</span> <span class="n">map</span> <span class="o">=</span> <span class="k">new</span> <span class="n">HashMap</span><span class="o">&lt;&gt;();</span>
+    <span class="kd">private</span> <span class="n">ReadWriteLock</span> <span class="n">readWriteLock</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ReentrantReadWriteLock</span><span class="o">();</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">put</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">,</span> <span class="n">Object</span> <span class="n">value</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">readWriteLock</span><span class="o">.</span><span class="na">writeLock</span><span class="o">().</span><span class="na">lock</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;\t写入数据&#34;</span> <span class="o">+</span> <span class="n">key</span><span class="o">);</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">TimeUnit</span><span class="o">.</span><span class="na">MILLISECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">300</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">map</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">key</span><span class="o">,</span> <span class="n">value</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;\t写入完成&#34;</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">readWriteLock</span><span class="o">.</span><span class="na">writeLock</span><span class="o">().</span><span class="na">unlock</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+
+    <span class="kd">public</span> <span class="kt">void</span> <span class="nf">get</span><span class="o">(</span><span class="n">String</span> <span class="n">key</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">readWriteLock</span><span class="o">.</span><span class="na">readLock</span><span class="o">().</span><span class="na">lock</span><span class="o">();</span>
+        <span class="k">try</span> <span class="o">{</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;\t读取数据&#34;</span><span class="o">);</span>
+            <span class="k">try</span> <span class="o">{</span>
+                <span class="n">TimeUnit</span><span class="o">.</span><span class="na">MILLISECONDS</span><span class="o">.</span><span class="na">sleep</span><span class="o">(</span><span class="n">300</span><span class="o">);</span>
+            <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">InterruptedException</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+            <span class="o">}</span>
+            <span class="n">Object</span> <span class="n">result</span> <span class="o">=</span> <span class="n">map</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">key</span><span class="o">);</span>
+            <span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">Thread</span><span class="o">.</span><span class="na">currentThread</span><span class="o">().</span><span class="na">getName</span><span class="o">()</span> <span class="o">+</span> <span class="s">&#34;\t读取成功&#34;</span> <span class="o">+</span> <span class="n">result</span><span class="o">);</span>
+        <span class="o">}</span> <span class="k">catch</span> <span class="o">(</span><span class="n">Exception</span> <span class="n">e</span><span class="o">)</span> <span class="o">{</span>
+            <span class="n">e</span><span class="o">.</span><span class="na">printStackTrace</span><span class="o">();</span>
+        <span class="o">}</span> <span class="k">finally</span> <span class="o">{</span>
+            <span class="n">readWriteLock</span><span class="o">.</span><span class="na">readLock</span><span class="o">().</span><span class="na">unlock</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+
+<span class="cm">/**
+</span><span class="cm"> * @author: lqy
+</span><span class="cm"> * @create: 2020/9/24
+</span><span class="cm"> * @description: ReadWriteLockDemo
+</span><span class="cm"> */</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">ReadWriteLockDemo</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+        <span class="n">MyCache</span> <span class="n">myCache</span> <span class="o">=</span> <span class="k">new</span> <span class="n">MyCache</span><span class="o">();</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kd">final</span> <span class="kt">int</span> <span class="n">tempInt</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+            <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                <span class="n">myCache</span><span class="o">.</span><span class="na">put</span><span class="o">(</span><span class="n">tempInt</span> <span class="o">+</span> <span class="s">&#34;&#34;</span><span class="o">,</span> <span class="n">tempInt</span> <span class="o">+</span> <span class="s">&#34;&#34;</span><span class="o">);</span>
+            <span class="o">},</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">i</span><span class="o">)).</span><span class="na">start</span><span class="o">();</span>
+        <span class="o">}</span>
+
+        <span class="k">for</span> <span class="o">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="n">1</span><span class="o">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">5</span><span class="o">;</span> <span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+            <span class="kd">final</span> <span class="kt">int</span> <span class="n">tempInt</span> <span class="o">=</span> <span class="n">i</span><span class="o">;</span>
+            <span class="k">new</span> <span class="n">Thread</span><span class="o">(()</span> <span class="o">-&gt;</span> <span class="o">{</span>
+                <span class="n">myCache</span><span class="o">.</span><span class="na">get</span><span class="o">(</span><span class="n">tempInt</span> <span class="o">+</span> <span class="s">&#34;&#34;</span><span class="o">);</span>
+            <span class="o">},</span> <span class="n">String</span><span class="o">.</span><span class="na">valueOf</span><span class="o">(</span><span class="n">i</span><span class="o">)).</span><span class="na">start</span><span class="o">();</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+ 
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="blockingqueue">BlockingQueue</h2>
+<ul>
+<li>阻塞队列：当队列为空，从队列中<strong>获取</strong>元素的操作将会被阻塞；当队列为满的，从队列中<strong>添加</strong>元素的操作将会被阻塞。</li>
+<li>作用：不需要关心什么时候需要阻塞线程，什么时候需要唤醒线程</li>
+<li>ArrayBlockingQueue:由数组结构组成的有界阻塞队列</li>
+<li>LinkedBlockingQueue：由链表结构组成的有界（但大小默认值为integer.MAX_VALUE）阻塞队列</li>
+<li>synchronousQueue：不存储元素的阻塞队列，也即单个元素队列</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>方法类型</th>
+<th>抛出异常</th>
+<th>特殊值</th>
+<th>阻塞</th>
+<th>超时</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>插入</td>
+<td>add(e)</td>
+<td>offer(e)</td>
+<td>put(e)</td>
+<td>offer(e,time,unit)</td>
+</tr>
+<tr>
+<td>移除</td>
+<td>remove()</td>
+<td>poll()</td>
+<td>take()</td>
+<td>pull(time,unit)</td>
+</tr>
+<tr>
+<td>检查</td>
+<td>element()</td>
+<td>peek()</td>
+<td>不可用</td>
+<td>不可用</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>抛出异常：当阻塞队列满时，再往队列里add插入元素，会抛出IllegalStateException:Queue full<br>
+当阻塞队列空时，再往队列里remove移除元素会抛出NoSuchElementException</li>
+<li>特殊值：插入方法，成功true,失败false<br>
+移除方法，成功返回出队列的元素，队列里没有就返回null</li>
+<li>一直阻塞：当阻塞队列满时，生产者线程继续往队列里put元素，队列会一直阻塞生产者线程直到put数据or响应中断退出<br>
+当阻塞队列空时，消费者线程试图从队列里take元素，队列会一直阻塞消费者线程直到队列可用</li>
+<li>超时退出：当阻塞队列满时，队列会阻塞生产者线程一定时间，超过限时后生产者线程会退出</li>
+</ul>
+<h2 id="线程池">线程池</h2>
+<ul>
+<li>
+<p>优势：控制运行的线程数量，处理过程中将任务放入队列，然后在线程创建后启动这些任务，如果线程数量超过了最大数量，超出数量的线程排队等候，等其他线程执行完毕，再从队列中取出任务来执行。</p>
+</li>
+<li>
+<p>特点：线程服用；控制最大并发量；管理线程</p>
+</li>
+<li>
+<p>降低资源消耗；提高响应速度；提高线程的可管理性。</p>
+</li>
+<li>
+<p>使用：</p>
+<ul>
+<li>Executors.newFixedThreadPool(int):执行长期任务性能好，创建一个线程池，一池有N个固定的线程，有固定线程数的线程</li>
+<li>Executors.newSingleThreadExecutor():一个任务一个任务地执行，一池一线程</li>
+<li>Executors.newCachedThreadPool():执行很多短期异步任务，线程池根据需要创建新线程，但在先前构建的线程可用时将重用他们。可扩容。</li>
+</ul>
+</li>
+<li>
+<p>线程池底层：ThreadPoolExecutor类<br>
+<img
+        class="lazyload"
+        src="/svg/loading.min.svg"
+        data-src="https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/dataThreadPooldiceng.png"
+        data-srcset="https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/dataThreadPooldiceng.png, https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/dataThreadPooldiceng.png 1.5x, https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/dataThreadPooldiceng.png 2x"
+        data-sizes="auto"
+        alt="https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/dataThreadPooldiceng.png"
+        title="https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/dataThreadPooldiceng.png" /></p>
+</li>
+<li>
+<p>七大参数：</p>
+<ol>
+<li>corePoolSize：线程池中的常驻核心线程数</li>
+<li>maximumPoolSize：线程池中能够容纳同时执行的最大线程数，此值必须大于等于1</li>
+<li>KeepAliveTime：多余的空闲线程的存活时间。当前池中线程数量超过corePoolSize时，当空闲时间达到KeepAliveTime时，多余线程会被销毁，直到只剩下corePoolSize个线程为止</li>
+<li>unit：KeepAliveTime的单位</li>
+<li>workQueue：任务队列，被提交但尚未被执行的任务</li>
+<li>threadFactory：表示生成线程池中工作线程的线程工厂，用于创建线程，一般默认的即可</li>
+<li>handler：拒绝策略，表示当队列满了，并且工作线程大于等于线程池的最大线程数（maximumPoolSize）时如何来拒绝请求执行的runnable的策略</li>
+</ol>
+<ul>
+<li>源码：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-java" data-lang="java"><span class="kd">public</span> <span class="nf">ThreadPoolExecutor</span><span class="o">(</span><span class="kt">int</span> <span class="n">corePoolSize</span><span class="o">,</span>
+                            <span class="kt">int</span> <span class="n">maximumPoolSize</span><span class="o">,</span>
+                            <span class="kt">long</span> <span class="n">keepAliveTime</span><span class="o">,</span>
+                            <span class="n">TimeUnit</span> <span class="n">unit</span><span class="o">,</span>
+                            <span class="n">BlockingQueue</span><span class="o">&lt;</span><span class="n">Runnable</span><span class="o">&gt;</span> <span class="n">workQueue</span><span class="o">,</span>
+                            <span class="n">ThreadFactory</span> <span class="n">threadFactory</span><span class="o">,</span>
+                            <span class="n">RejectedExecutionHandler</span> <span class="n">handler</span><span class="o">)</span> <span class="o">{</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">corePoolSize</span> <span class="o">&lt;</span> <span class="n">0</span> <span class="o">||</span>
+            <span class="n">maximumPoolSize</span> <span class="o">&lt;=</span> <span class="n">0</span> <span class="o">||</span>
+            <span class="n">maximumPoolSize</span> <span class="o">&lt;</span> <span class="n">corePoolSize</span> <span class="o">||</span>
+            <span class="n">keepAliveTime</span> <span class="o">&lt;</span> <span class="n">0</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">IllegalArgumentException</span><span class="o">();</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">workQueue</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">threadFactory</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">handler</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+            <span class="k">throw</span> <span class="k">new</span> <span class="n">NullPointerException</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">acc</span> <span class="o">=</span> <span class="n">System</span><span class="o">.</span><span class="na">getSecurityManager</span><span class="o">()</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">?</span>
+                <span class="kc">null</span> <span class="o">:</span>
+                <span class="n">AccessController</span><span class="o">.</span><span class="na">getContext</span><span class="o">();</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">corePoolSize</span> <span class="o">=</span> <span class="n">corePoolSize</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">maximumPoolSize</span> <span class="o">=</span> <span class="n">maximumPoolSize</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">workQueue</span> <span class="o">=</span> <span class="n">workQueue</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">keepAliveTime</span> <span class="o">=</span> <span class="n">unit</span><span class="o">.</span><span class="na">toNanos</span><span class="o">(</span><span class="n">keepAliveTime</span><span class="o">);</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">threadFactory</span> <span class="o">=</span> <span class="n">threadFactory</span><span class="o">;</span>
+        <span class="k">this</span><span class="o">.</span><span class="na">handler</span> <span class="o">=</span> <span class="n">handler</span><span class="o">;</span>
+    <span class="o">}</span>
+</code></pre></td></tr></table>
+</div>
+</div></li>
+<li>
+<p>线程池的拒绝策略：</p>
+<ul>
+<li>等待队列满了，线程池中的工作线程数也达到了最大，无法继续为新任务服务。这时候就需要拒绝策略机制来处理这个问题。</li>
+<li>JDK内置4中拒绝策略：
+<ol>
+<li>AbortPolicy（默认）：直接抛出RejectedExecutionException异常阻止系统正常运行</li>
+<li>CallerRunsPolicy：“调用者运行”，一种调节机制，该策略既不会抛弃任务，也不会抛出异常，而是将某些任务回退到调用者，从而降低新任务的流量</li>
+<li>DiscardOldestPolicy：抛弃队列中等待最久的任务，然后把当前任务加入到队列中尝试再次提交当前任务</li>
+<li>DiscardPolicy：该策略默默地丢弃无法处理的任务，不予任何处理也不抛出异常。如果允许任务丢失，可以使用此策略。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p>线程池底层工作原理：</p>
+<ol>
+<li>在创建了线程池后，开始等待请求</li>
+<li>当调用execute()方法添加一个请求任务时，线程池会做出如下判断：<br>
+2.1 如果正在运行的线程数量小于corePoolSize，那么马上创建线程运行这个任务；<br>
+2.2 如果正在运行的线程数量大于或等于corePoolSize，那么<strong>入队</strong><br>
+2.3 如果这个时候队列满了，且正在运行的线程数量还小于maximumPoolSize，那么还是要创建非核心线程立刻执行次任务（相当于扩容）<br>
+2.4 如果队列满了且正在运行的线程数大于或等于maximumPoolSize，则<strong>启动饱和拒绝策略</strong>来处理</li>
+<li>当一个线程完成任务时，他会从队列中取下一个任务来执行</li>
+<li>当一个线程无事可做超过一定的时间（KeepAliveTime）时，线程会判断：<br>
+如果当前运行的线程数大于corePoolSize，那么这个线程就被停掉；<br>
+所有线程池的任务完成后，线程数会收缩到corePoolSize的大小。</li>
+</ol>
+</li>
+</ul>
+<div class="details admonition warning open">
+        <div class="details-summary admonition-title">
+            <i class="icon fas fa-exclamation-triangle fa-fw"></i>注意<i class="details-icon fas fa-angle-right fa-fw"></i>
+        </div>
+        <div class="details-content">
+            <div class="admonition-content"><strong>线程池不允许使用Executors去创建，而是通过ThreadPoolExecutor的方式！！</strong></div>
+        </div>
+    </div>
+<ul>
+<li>
+<p>这样的处理方式让写的同学更加明确线程池的运行规则，规避资源耗尽的风险。<br>
+<strong>说明</strong>：Executors 返回的线程池对象的弊端如下：</p>
+<ol>
+<li>FixedThreadPool和SingleThreadPool：<br>
+允许的请求队列长度为Integer.MAX_VALUE，可能会堆积大量的请求，从而导致OOM。</li>
+<li>CachedThreadPool：<br>
+允许创建线程数量为Integer.MAX_VALUE，可能会堆积大量的请求，从而导致OOM。</li>
+</ol>
+</li>
+<li>
+<p>线程池最大容纳数：maximumPoolSize + 队列长度</p>
+</li>
+</ul>
 </div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-09-23</span>
+                <span>更新于 2020-09-26</span>
             </div>
             <div class="post-info-license"></div>
         </div>
