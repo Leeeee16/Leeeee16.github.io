@@ -6,12 +6,19 @@
         <generator>Hugo -- gohugo.io</generator><language>zh-CN</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Fri, 02 Aug 2019 11:04:49 &#43;0800</lastBuildDate>
             <atom:link href="https://Leeeee16.github.io/index.xml" rel="self" type="application/rss+xml" />
         <item>
+    <title>二分查找</title>
+    <link>https://Leeeee16.github.io/posts/binarysearch/</link>
+    <pubDate>Mon, 19 Oct 2020 14:37:48 &#43;0800</pubDate>
+    <author>作者</author>
+    <guid>https://Leeeee16.github.io/posts/binarysearch/</guid>
+    <description><![CDATA[<p>二分查找</p>]]></description>
+</item><item>
     <title>算法-排序算法</title>
     <link>https://Leeeee16.github.io/posts/sort/</link>
     <pubDate>Sun, 18 Oct 2020 10:21:04 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://Leeeee16.github.io/posts/sort/</guid>
-    <description><![CDATA[<p>排序算法的java实现</p>]]></description>
+    <description><![CDATA[<p>排序算法</p>]]></description>
 </item><item>
     <title>人工智能课程笔记</title>
     <link>https://Leeeee16.github.io/posts/ai_notes/</link>
@@ -39,7 +46,7 @@
     <pubDate>Wed, 08 Jul 2020 11:33:55 &#43;0800</pubDate>
     <author>作者</author>
     <guid>https://Leeeee16.github.io/posts/java_basic/</guid>
-    <description><![CDATA[重新看看Java基础 顺便随便记一些基础的东西。。😃 Java内存结构概述 栈(Stack): 存放方法中的局部变量。一旦超出作用域，java会自动]]></description>
+    <description><![CDATA[重新看看Java基础 顺便随便记一些基础的东西。。😃 数据类型 基本类型：4种整型、两种浮点类型、1中用于表示Unicode编码的字符型char和]]></description>
 </item><item>
     <title>ASP.NET Core 随笔</title>
     <link>https://Leeeee16.github.io/posts/netcore%E9%9A%8F%E7%AC%94/</link>
@@ -68,12 +75,5 @@
     <author>作者</author>
     <guid>https://Leeeee16.github.io/posts/06-%E4%B8%80%E4%BA%9B%E6%AD%A3%E5%88%99/</guid>
     <description><![CDATA[常用的匹配规则 菜鸟教程-正则 match 传入正则表达式，以及字符串，就能返回是否匹配。如果匹配，就返回匹配成功的结果；不匹配，就返回None。注意：m]]></description>
-</item><item>
-    <title>LeetCode面试题62. 圆圈中最后剩下的数字-随笔</title>
-    <link>https://Leeeee16.github.io/posts/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94/</link>
-    <pubDate>Mon, 30 Mar 2020 13:04:25 &#43;0800</pubDate>
-    <author>作者</author>
-    <guid>https://Leeeee16.github.io/posts/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94/</guid>
-    <description><![CDATA[题目：0,1,&hellip;,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字]]></description>
 </item></channel>
 </rss>

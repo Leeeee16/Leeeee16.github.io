@@ -6,7 +6,58 @@
 >顺便随便记一些基础的东西。。:smiley:
 * * *
   
-## 
+## 数据类型  
+基本类型：4种整型、两种浮点类型、1中用于表示Unicode编码的字符型char和boolean型  
+1. 整型：int、short、long、byte  
+2. 浮点型：float、double  
+    > 注意：浮点型存在舍入误差，有些小数无法精确表示，如果在数值计算时不允许有误差，可以考虑使用BigDecimal类  
+3. char类型：用单引号括起来  
+4. boolean：两个值：true和false  
+   > 在c++中，可以使用数值0表示布尔值false，非0相当于布尔值true；但Java中不行，编译不能通过  
+   
+## final  
+1. 关键字final指示常量。  
+2. final表示这个变量只能被赋值一次。一旦被赋值后，就不能改变。  
+3. 常量名一般使用全大写。  
+4. 类常量可以使用`static final`来设置，定义位于main方法外，同一个类中的方法都可以使用。  
+  
+## 枚举类型  
+  
+
+## 字符串  
+1. 子串：String类的substring方法可以从一个字符串中提取出一个子串。  
+   `substring(int beginIndex, int endIndex)`：注意是左闭右开  
+2. 拼接：  
+    * 可以直接使用 “+”号 将两个字符串进行拼接；  
+    * 字符串与非字符串用“+”号拼接时，非字符会被转成字符串，输出中常用  
+    * 多个字符串拼接可以使用join方法：`String s = String.join("/","good","bad","haha") // good/bad/haha`  
+3.  不可变字符串：String类没有提供修改字符串的方法，在Java中，字符串相当于存放在一个公共的存储池中，字符串变量指向存储池中相应的位置，编译期可以让字符串共享。当字符串变量不使用后，Java会进行垃圾回收。  
+4.  空串与null：空串是长度为0，内容为空的字符串，判断字符串是否为空：`if(str.length() == 0)`或者`if(str.equals(""))`；null表示没有任何对象与该变量关联，判断一个字符串是否为null：`if(str == null)`  
+5. 字符串的构建：由较短的字符串构建字符串时，采用字符串连接的方式效率比较地下。每次连接字符串，都会创建一个新的String对象，耗时耗空间。因此可以使用StringBuilder类。  
+```java
+    public String implicit(String[] fields) {
+        String res = "";
+        for (int i = 0; i < fields.length; i++) {
+            res += fields[i];
+        }
+        return res;
+    }
+    public String explicit(String[] fields) {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < fields.length; i++) {
+            res.append(fields[i]);
+        }
+        return res.toString();
+    }
+}
+```  
+可以看到上面两个方法各自实现了字符串的拼接，我们通过编译，得到字节码，如下图：  
+![](https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/datastringBuilderTest01.jpg)  
+字节码的8-35行构成一个循环体，循环体内new了一个StringBuilder对象，也就是说每次循环都会创建一个新的StringBuilder对象。  
+![](https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/datastringBuilderTest02.jpg)  
+而第二个方法，它只创建了一个StringBuilder对象。  
+
+
 
 
 ## Java内存结构概述  

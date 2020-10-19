@@ -1,7 +1,7 @@
 # 算法-排序算法
 
 
-排序算法的java实现
+排序算法
 <!--more-->
 ## 快速排序  
 ### 1.基本快速排序  
@@ -152,7 +152,8 @@ public class Main {
     }
 }
 ```
-
+- - -
+* 模板参考自[ACWing](https://www.acwing.com/blog/content/277/):+1:
 
 
 
