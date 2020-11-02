@@ -1,12 +1,7 @@
-# 04-一些多进程
+# 一些多进程
 
   
-  
-* * *
-最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。:wink:
-  
-[课程链接](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=46#/content)
-* * *
+
 
 ### Python多进程的实现
   

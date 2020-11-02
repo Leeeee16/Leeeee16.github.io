@@ -1,11 +1,7 @@
-# 02-一些前端
+# 一些前端
 
   
-* * *
-最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。:wink:
-  
-[课程链接](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=46#/content)
-* * *
+
   
 **CSS定位节点**  
   

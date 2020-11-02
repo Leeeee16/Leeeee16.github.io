@@ -1,12 +1,7 @@
-# 01-一些HTMl原理
+# 一些HTMl原理
 
   
-  
-* * *
-最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。:wink:
-  
-[课程链接](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=46#/content)
-* * *
+
 
 **HTTP和HTTPS**  
   

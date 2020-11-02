@@ -24,84 +24,6 @@
 ## 枚举类型  
   
 
-## 字符串  
-1. 子串：String类的substring方法可以从一个字符串中提取出一个子串。  
-   `substring(int beginIndex, int endIndex)`：注意是左闭右开  
-2. 拼接：  
-    * 可以直接使用 “+”号 将两个字符串进行拼接；  
-    * 字符串与非字符串用“+”号拼接时，非字符会被转成字符串，输出中常用  
-    * 多个字符串拼接可以使用join方法：`String s = String.join("/","good","bad","haha") // good/bad/haha`  
-3.  不可变字符串：String类没有提供修改字符串的方法，在Java中，字符串相当于存放在一个公共的存储池中，字符串变量指向存储池中相应的位置，编译期可以让字符串共享。当字符串变量不使用后，Java会进行垃圾回收。  
-4.  空串与null：空串是长度为0，内容为空的字符串，判断字符串是否为空：`if(str.length() == 0)`或者`if(str.equals(""))`；null表示没有任何对象与该变量关联，判断一个字符串是否为null：`if(str == null)`  
-5. 字符串的构建：由较短的字符串构建字符串时，采用字符串连接的方式效率比较地下。每次连接字符串，都会创建一个新的String对象，耗时耗空间。因此可以使用StringBuilder类。  
-```java
-    public String implicit(String[] fields) {
-        String res = "";
-        for (int i = 0; i < fields.length; i++) {
-            res += fields[i];
-        }
-        return res;
-    }
-    public String explicit(String[] fields) {
-        StringBuilder res = new StringBuilder();
-        for (int i = 0; i < fields.length; i++) {
-            res.append(fields[i]);
-        }
-        return res.toString();
-    }
-}
-```  
-可以看到上面两个方法各自实现了字符串的拼接，我们通过编译，得到字节码，如下图：  
-![](https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/datastringBuilderTest01.jpg)  
-字节码的8-35行构成一个循环体，循环体内new了一个StringBuilder对象，也就是说每次循环都会创建一个新的StringBuilder对象。  
-![](https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/datastringBuilderTest02.jpg)  
-而第二个方法，它只创建了一个StringBuilder对象。  
-
-
-
-
-## Java内存结构概述  
-1. 栈(Stack): 存放方法中的局部变量。一旦超出作用域，java会自动释放它的内存空间。  
-2. 堆(Heap): 凡是new出来的东东（对象、数组等等），都存放在堆中。  
-堆中的东西都有一个内存地址值（16进制），且都有一个默认初始值。规则如下：  
-int默认为0；double默认为0.0；字符默认为'\u0000'；布尔默认为false；引用类型默认为null。  
-实体不再被使用后，会在不确定的时间内被垃圾回收器回收。  
-3. 方法区(Method Area)：包含class和static变量。  
-4. 本地方法栈(Native Method Stack)：与操作系统相关。  
-5. 寄存器(pc Register)：CPU相关。CPU访问寄存器执行速度远大于在主存上的执行速度。
-  
-## 面向对象三大特征  
-1. 封装：将实现的细节隐藏，对外界不可见。需要的时候直接调用即可，不需要知道实现细节。  
-    （1） 方法就是一种封装  
-    （2） 关键字private也是一种封装：使用private修饰后，只能在类的内部进行访问。在本类范围外则不能直接访问，不能对其进行修改。间接访问static成员变量，可以定义一组getter/setter方法。  
-2. 继承：将共性提取到父类中。继承是多态的前提。  
-Java是**单继承**的。可以**多级继承**。    
-
-  
-3. 多态：
-  
-## this关键字  
-方法的局部变量和类的成员变量重名时，会就近使用方法的局部变量。如果要访问类的成员变量，需要使用this。格式：this.成员变量名。  
->ps：谁调用的方法，谁就是this。也就是当前的对象。
-  
-## 构造方法  
-构造方法是用来创建对象的方法。一般通过new关键字来创建对象时调用的。格式：  
-```Java
-public 类名称(参数类型 参数名称, ...){
-    方法体
-}
-```  
-注：
-1. 构造方法的名称必须和类名称完全一样。  
-2. 构造方法无返回值。  
-3. 如果无构造方法，默认一个无参构造方法，方法体啥都不做。  
-4. 构造方法可以重载（方法名相同，参数列表不同）。 
-  
-## 标准Java类  
-1. 所有成员变量使用private修饰。  
-2. 为每个成员变量写一对Getter/Setter方法。  
-3. 编写一个无参构造方法。  
-4. 编写一个全参构造方法。
   
 ## Scanner类  
 从键盘输入数据。  
@@ -277,13 +199,179 @@ public 类名称(参数类型 参数名称, ...){
         }
     }
     ```  
-    >注意：split方法的参数其实是一个**正则表达式**。需要注意转义。如按照英文句点"."来切分，必须写" \\\\. "
+    >注意：split方法的参数其实是一个**正则表达式**。需要注意转义。如按照英文句点"."来切分，必须写" \\\\. "  
+
+4. 拼接：  
+    * 可以直接使用 “+”号 将两个字符串进行拼接；  
+    * 字符串与非字符串用“+”号拼接时，非字符会被转成字符串，输出中常用  
+    * 多个字符串拼接可以使用join方法：`String s = String.join("/","good","bad","haha") // good/bad/haha`  
+5.  不可变字符串：String类没有提供修改字符串的方法，在Java中，字符串相当于存放在一个公共的存储池中，字符串变量指向存储池中相应的位置，编译期可以让字符串共享。当字符串变量不使用后，Java会进行垃圾回收。  
+6.  空串与null：空串是长度为0，内容为空的字符串，判断字符串是否为空：`if(str.length() == 0)`或者`if(str.equals(""))`；null表示没有任何对象与该变量关联，判断一个字符串是否为null：`if(str == null)`  
+7. 字符串的构建：由较短的字符串构建字符串时，采用字符串连接的方式效率比较地下。每次连接字符串，都会创建一个新的String对象，耗时耗空间。因此可以使用StringBuilder类。  
+```java
+    public String implicit(String[] fields) {
+        String res = "";
+        for (int i = 0; i < fields.length; i++) {
+            res += fields[i];
+        }
+        return res;
+    }
+    public String explicit(String[] fields) {
+        StringBuilder res = new StringBuilder();
+        for (int i = 0; i < fields.length; i++) {
+            res.append(fields[i]);
+        }
+        return res.toString();
+    }
+}
+```  
+可以看到上面两个方法各自实现了字符串的拼接，我们通过编译，得到字节码，如下图：  
+![](https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/datastringBuilderTest01.jpg)  
+字节码的8-35行构成一个循环体，循环体内new了一个StringBuilder对象，也就是说每次循环都会创建一个新的StringBuilder对象。  
+![](https://cdn.jsdelivr.net/gh/Leeeee16/blog_picBed/datastringBuilderTest02.jpg)  
+而第二个方法，它只创建了一个StringBuilder对象。  
     
+
+## switch语句  
+1. 用法：  
+```java
+switch(choice) {
+    case 1:
+        ...
+        break;
+    case 2:
+        ...
+        break;
+    case 3:
+        ...
+        break;
+    default:
+        ...
+        break;
+}
+```  
+2. switch语句将从与选项值匹配的case标签处开始执行，直到碰到break语句，或者一直执行到switch语句的结束处。如果没有匹配的case，并有default语句，就执行default语句  
+> **注意**：如果case结尾没有break，程序会继续执行下一个case分支语句  
+
+3. case的标签可以是：char、byte、short、int的常量表达式，也可以为枚举或者字符串字面量  
+4. switch使用枚举时,不必在每个标签中指明枚举名：  
+```java
+Size sz = ...;
+switch(sz) {
+    case SMALL: // no need to use Size.SMALL
+        ...
+        break;
+    ...
+}
+```  
+
+## 大数值  
+1. java.math包中的：BigInteger和BigDecimal。这两个类可以处理包含任意长度数字序列的数值，前者实现了任意精度的整数运算，后者则实现了任意精度的浮点数计算。  
+2. 可以使用valueOf方法将普通数值转换为大数值：`BigInteger num = BigInteger.valueOf(100)`  
+3. 大数值的运算不能使用算数运算符，需要使用大数值类中的add、subtract、multiply、divide、mod方法  
+4.  大数值的divide方法需要给出舍入方式，RoundingMode.HALF_UP为四舍五入  
+  
+## Arrays.sort()  
+1. 默认为升序排序  
+2. 采用了双基准快排(DualPivotQuicksort)。快排采用分治的思想，用一个pivot将原数组分成两个子数组，然后递归。双基准快排则是采用两个pivot，将原数组分成三部分（x < pivot1 ; pivot1 <= x <= pivot2 ; x > pivot3）,然后递归。  
+3. Arrays.sort()采用了很多排序方法，不同的情况则使用不同的排序方法。我们假设原数组长度为length    
+    * length <= 47 ：使用插入排序  
+    * 47 < length <= 286 ：使用快速排序  
+    * length > 286 并且 数组高度结构化(基本有序) ：归并排序  
+    * length > 286 并且 基本无序或逆序 ： 快速排序  
+4. 双基准快排的细节：  
+    * 在选取pivot时，首先通过位运算，获取数组长度的1/7左右  
+    ```java
+        // Inexpensive approximation of length / 7
+        int seventh = (length >> 3) + (length >> 6) + 1;
+    ```  
+    * 然后选取数组的中间位置e3,以及e3左右1/7、2/7的位置，分别为e1、e2和e4、e5  
+    ```java
+        /*
+         * Sort five evenly spaced elements around (and including) the
+         * center element in the range. These elements will be used for
+         * pivot selection as described below. The choice for spacing
+         * these elements was empirically determined to work well on
+         * a wide variety of inputs.
+         */
+        int e3 = (left + right) >>> 1; // The midpoint
+        int e2 = e3 - seventh;
+        int e1 = e2 - seventh;
+        int e4 = e3 + seventh;
+        int e5 = e4 + seventh;
+    ```  
+    * 然后对5个索引进行排序，这里用的是插入排序。排完后放回5个位置中  
+    ```java
+        // Sort these elements using insertion sort
+        if (a[e2] < a[e1]) { int t = a[e2]; a[e2] = a[e1]; a[e1] = t; }
+
+        if (a[e3] < a[e2]) { int t = a[e3]; a[e3] = a[e2]; a[e2] = t;
+            if (t < a[e1]) { a[e2] = a[e1]; a[e1] = t; }
+        }
+        if (a[e4] < a[e3]) { int t = a[e4]; a[e4] = a[e3]; a[e3] = t;
+            if (t < a[e2]) { a[e3] = a[e2]; a[e2] = t;
+                if (t < a[e1]) { a[e2] = a[e1]; a[e1] = t; }
+            }
+        }
+        if (a[e5] < a[e4]) { int t = a[e5]; a[e5] = a[e4]; a[e4] = t;
+            if (t < a[e3]) { a[e4] = a[e3]; a[e3] = t;
+                if (t < a[e2]) { a[e3] = a[e2]; a[e2] = t;
+                    if (t < a[e1]) { a[e2] = a[e1]; a[e1] = t; }
+                }
+            }
+        }
+        // Pointers
+        int less  = left;  // The index of the first element of center part
+        int great = right; // The index before the first element of right part
+    ```  
+    * 如果5个元素都不相同，则e2为pivot1，e4为pivot3，然后继续双基准快排  
+    * 如果5个元素存在相同的，则以e3为pivot进行普通快排  
+
+## 
+
+
 ## HashMap（待补充）  
 1. 底层？  
     * 初始大小16，默认负载因子0.75（可自定义），12时扩容，扩容一倍即32  
     * HashMap存的是Node节点，Node节点里包含key和value  
     * HashMap由数组+单向链表
+
+## Java内存结构概述  
+1. 栈(Stack): 存放方法中的局部变量。一旦超出作用域，java会自动释放它的内存空间。  
+2. 堆(Heap): 凡是new出来的东东（对象、数组等等），都存放在堆中。  
+堆中的东西都有一个内存地址值（16进制），且都有一个默认初始值。规则如下：  
+int默认为0；double默认为0.0；字符默认为'\u0000'；布尔默认为false；引用类型默认为null。  
+实体不再被使用后，会在不确定的时间内被垃圾回收器回收。  
+3. 方法区(Method Area)：包含class和static变量。  
+4. 本地方法栈(Native Method Stack)：与操作系统相关。  
+5. 寄存器(pc Register)：CPU相关。CPU访问寄存器执行速度远大于在主存上的执行速度。
+  
+## 面向对象三大特征  
+1. 封装：将实现的细节隐藏，对外界不可见。需要的时候直接调用即可，不需要知道实现细节。  
+    （1） 方法就是一种封装  
+    （2） 关键字private也是一种封装：使用private修饰后，只能在类的内部进行访问。在本类范围外则不能直接访问，不能对其进行修改。间接访问static成员变量，可以定义一组getter/setter方法。  
+2. 继承：将共性提取到父类中。继承是多态的前提。  
+Java是**单继承**的。可以**多级继承**。    
+
+  
+3. 多态：
+  
+## this关键字  
+方法的局部变量和类的成员变量重名时，会就近使用方法的局部变量。如果要访问类的成员变量，需要使用this。格式：this.成员变量名。  
+>ps：谁调用的方法，谁就是this。也就是当前的对象。
+  
+## 构造方法  
+构造方法是用来创建对象的方法。一般通过new关键字来创建对象时调用的。格式：  
+```Java
+public 类名称(参数类型 参数名称, ...){
+    方法体
+}
+```  
+注：
+1. 构造方法的名称必须和类名称完全一样。  
+2. 构造方法无返回值。  
+3. 如果无构造方法，默认一个无参构造方法，方法体啥都不做。  
+4. 构造方法可以重载（方法名相同，参数列表不同）。 
 
 ## static  
 1. 使用static关键字修饰的成员变量，不再属于对象自己，而是属于类的。所有的对象共享同一份。  

@@ -1,12 +1,6 @@
-# 05-一些Requests
+# 一些Requests
 
   
-  
-* * *
-最近在看拉钩上崔大的爬虫课，稍微整理一些知识点。:wink:
-  
-[课程链接](https://kaiwu.lagou.com/course/courseInfo.htm?courseId=46#/content)
-* * *
   
 ## 基本用法
 
