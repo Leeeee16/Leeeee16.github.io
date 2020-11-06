@@ -322,12 +322,325 @@ public boolean search(int[] nums, int target) {
     }
     return nums[left] == target;
 }
+```  
+
+## LeetCode-153. 寻找旋转排序数组中的最小值  
+[LeetCode-153. 寻找旋转排序数组中的最小值](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array/)  
+假设按照升序排序的数组在预先未知的某个点上进行了旋转。  
+( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。  
+请找出其中最小的元素。  
+你可以假设数组中不存在重复元素。  
+- 有了上面两题的铺垫，这题比较容易解决
+```java
+public int findMin(int[] nums) {
+        int len = nums.length;
+        int min = Integer.MAX_VALUE;
+        if (len == 0) {
+            return 0;
+        }
+        if (len == 1) {
+            return nums[0];
+        }
+        int left = 0, right = len - 1;
+        while (left < right) {
+            int mid = left + (right - left + 1) / 2;
+            if (nums[mid] > nums[left]) { // 左区间有序
+                min = Math.min(min, nums[left]);
+                left = mid;
+            } else {
+                min = Math.min(min, nums[mid]);
+                right = mid - 1;
+            }
+        }
+        return min;
+    }
+```  
+
+## LeetCode-154. 寻找旋转排序数组中的最小值 II  
+[LeetCode-154. 寻找旋转排序数组中的最小值 II](https://leetcode-cn.com/problems/find-minimum-in-rotated-sorted-array-ii/)  
+假设按照升序排序的数组在预先未知的某个点上进行了旋转。  
+( 例如，数组 [0,1,2,4,5,6,7] 可能变为 [4,5,6,7,0,1,2] )。  
+请找出其中最小的元素。  
+注意数组中可能存在重复的元素。  
+    
+```java
+public int findMin(int[] nums) {
+    int len = nums.length;
+    int min = Integer.MAX_VALUE;
+    if (len == 0) {
+        return 0;
+    }
+    if (len == 1) {
+        return nums[0];
+    }
+    int left = 0, right = len - 1;
+    while (left < right) {
+        int mid = left + (right - left + 1) / 2;
+        if (nums[mid] > nums[left]) {
+            min = Math.min(min, nums[left]);
+            left = mid;
+        } else if (nums[mid] < nums[right]) {
+            min = Math.min(min, nums[mid]);
+            right = mid - 1;
+        } else {
+            min = Math.min(min, nums[right--]);
+        }
+    }
+    return min;
+}
+```
+  
+## LeetCode-300. 最长上升子序列  
+[LeetCode-300. 最长上升子序列](https://leetcode-cn.com/problems/longest-increasing-subsequence/)  
+给定一个无序的整数数组，找到其中最长上升子序列的长度。  
+
+```java
+/**
+* 1. 动态规划
+* 状态：dp[i]表示：以nums[i]结尾的 上升子序列 的长度
+* 状态转移方程：dp[i] = max{1 + dp[j] for j < i if nums[j] > nums[i]}
+* 时间复杂的：O(N^2)
+* 空间复杂度：O(N)
+*/
+public int lengthOfLIS_dp(int[] nums) {
+    int len = nums.length;
+    if (len == 0 || len == 1) {
+        return len;
+    }
+    int[] dp = new int[len];
+    Arrays.fill(dp, 1);
+
+    for (int i = 1; i < len; i++) {
+        for (int j = 0; j < i; j++) {
+            if (nums[j] < nums[i]) {
+                dp[i] = Math.max(dp[i], dp[j] + 1);
+            }
+        }
+    }
+    int res = 0;
+    for (int i = 0; i < len; i++) {
+        res = Math.max(res, dp[i]);
+    }
+    return res;
+}
+
+/**
+    * 2. 修改状态定义（贪心 + 二分）
+    */
+public int lengthOfLIS_2(int[] nums) {
+    int len = nums.length;
+    if(len <= 1) {
+        return len;
+    }
+    // tail数组的定义：长度为i+1的上升子序列的末尾最小是几
+    int[] tail = new int[len];
+    tail[0] = nums[0];
+    // end表示有序数组tail的最后一个已经赋值的索引
+    int end = 0;
+    for (int i = 1; i < len; i++) {
+        // 比tail数组实际有效的末尾的那个元素还大
+        if(nums[i] > tail[end]) {
+            // 直接添加在那个元素的后面，end先+1
+            end++;
+            tail[end] = nums[i];
+        }else {
+            // 使用二分查找，在有序数组tail中
+            // 找到第一个大于等于nums[i]的元素，尝试让那个元素更小
+            int left = 0, right = end;
+            while(left < right) {
+                int mid = left + (right - left) / 2;
+                if(tail[mid] < nums[i]) {
+                    // 中位数肯定不是要找的数，把他算进分支前面
+                    left = mid + 1;
+                }else {
+                    right = mid;
+                }
+            }
+            // 走到这里是因为 【逻辑 1】 的反面，因此一定能找到第 1 个大于等于 nums[i] 的元素
+            // 因此，无需再单独判断
+            tail[left] = nums[i];
+        }
+    }
+    // 此时end是有序数组tail最后一个元素的索引
+    // 题目要求返回的是长度，因此为end++
+    end++;
+    return end;
+}
+```  
+
+## LeetCode-852. 山脉数组的峰顶索引  
+[852. 山脉数组的峰顶索引](https://leetcode-cn.com/problems/peak-index-in-a-mountain-array/)  
+我们把符合下列属性的数组 A 称作山脉：  
+A.length >= 3  
+存在 0 < i < A.length - 1 使得A[0] < A[1] < ... A[i-1] < A[i] > A[i+1] > ... > A[A.length - 1]  
+给定一个确定为山脉的数组，返回任何满足 A[0] < A[1] < ... A[i-1] < A[i] > A[i+1] > ... > A[A.length - 1] 的 i 的值。  
+
+```java
+    public int peekIndexInMountainArray(int[] arr) {
+        int len = arr.length;
+        int left = 0, right = len - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (arr[mid] < arr[mid + 1]) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left;
+    }
+```  
+
+## LeetCode-1095. 山脉数组中查找目标值  
+[1095. 山脉数组中查找目标值](https://leetcode-cn.com/problems/find-in-mountain-array/)  
+给你一个 山脉数组 mountainArr，请你返回能够使得 mountainArr.get(index) 等于 target 最小 的下标 index 值。  
+如果不存在这样的下标 index，就请返回 -1。  
+何为山脉数组？如果数组 A 是一个山脉数组的话，那它满足如下条件：  
+首先，A.length >= 3  
+其次，在 0 < i < A.length - 1 条件下，存在 i 使得：  
+A[0] < A[1] < ... A[i-1] < A[i]  
+A[i] > A[i+1] > ... > A[A.length - 1]  
+你将 不能直接访问该山脉数组，必须通过 MountainArray 接口来获取数据：  
+MountainArray.get(k) - 会返回数组中索引为k 的元素（下标从 0 开始）  
+MountainArray.length() - 会返回该数组的长度  
+注意：  
+对 MountainArray.get 发起超过 100 次调用的提交将被视为错误答案。此外，任何试图规避判题系统的解决方案都将会导致比赛资格被取消。  
+
+> 思路：  
+> 1. 先找到山峰顶点坐标，左边就为递增序列，右边为递减序列  
+> 2. 先对左边递增序列，二分查找，找到则返回下标，没有就返回-1  
+> 3. 左边如果返回-1，再对右边区间用二分查找  
+  
+```java
+interface MountainArray {
+    public int get(int index);
+
+    public int length();
+}
+
+class MountainArrayImpl implements MountainArray {
+    private int[] arr;
+    private int size;
+
+    public MountainArrayImpl(int[] arr) {
+        this.arr = arr;
+        this.size = arr.length;
+    }
+
+    @Override
+    public int get(int index) {
+        return this.arr[index];
+    }
+
+    @Override
+    public int length() {
+        return this.size;
+    }
+
+}
+
+
+public class LeetCode1095 {
+    public int findInMountainArray(int target, MountainArray mountainArr) {
+        int mountainTop = peekMountainTop(mountainArr);
+        int res = findLeft(mountainArr, 0, mountainTop, target);
+        if (res != -1) {
+            return res;
+        } else {
+            return findRight(mountainArr, mountainTop, mountainArr.length() - 1, target);
+        }
+    }
+
+    // 在做递增区间找target
+    public int findLeft(MountainArray arr, int lo, int hi, int target) {
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (arr.get(mid) == target) {
+                return mid;
+            }
+            if (arr.get(mid) < target) {
+                lo = mid + 1;
+            } else {
+                hi = mid;
+            }
+        }
+        if (arr.get(lo) == target) {
+            return lo;
+        } else { // 不在左区间
+            return -1;
+        }
+    }
+
+    public int findRight(MountainArray arr, int lo, int hi, int target) {
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (arr.get(mid) == target) {
+                return mid;
+            }
+            if (arr.get(mid) > target) {
+                lo = mid + 1;
+            } else {
+                hi = mid;
+            }
+        }
+        if (arr.get(lo) == target) {
+            return lo;
+        } else {
+            return -1;
+        }
+    }
+
+    // 找山顶坐标
+    public int peekMountainTop(MountainArray arr) {
+        int len = arr.length();
+        int left = 0, right = len - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (arr.get(mid) < arr.get(mid + 1)) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return left;
+    }
 ```
 
+## LeetCode-1300. 转变数组后最接近目标值的数组和  
+[LeetCode-1300. 转变数组后最接近目标值的数组和 ](https://leetcode-cn.com/problems/sum-of-mutated-array-closest-to-target/)  
+给你一个整数数组 arr 和一个目标值 target ，请你返回一个整数 value ，使得将数组中所有大于 value 的值变成 value 后，数组的和最接近  target （最接近表示两者之差的绝对值最小）。  
+如果有多种使得和最接近 target 的方案，请你返回这些整数中的最小值。  
+请注意，答案不一定是 arr 中的数字。  
 
+```java
+public int findBestValue(int[] arr, int target) {
+        Arrays.sort(arr);
+        int lo = 0, hi = arr[arr.length - 1];
+        while (lo < hi) {
+            int mid = lo + (hi - lo + 1) / 2;
+            int sum_l = helper(arr, mid - 1, target);
+            int sum_m = helper(arr, mid, target);
+            int sum_r = helper(arr, mid + 1, target);
+            if (sum_l > sum_m) {
+                lo = mid;
+            } else {
+                hi = mid - 1;
+            }
+        }
+        return lo;
+    }
 
+// 计算数组和 与 target 的绝对值
+public int helper(int[] arr, int value, int target) {
+    int sum = 0;
+    for (int num : arr) {
+        sum += Math.min(num, value);
+    }
+    return Math.abs(sum - target);
+}
+```  
 
-
+## 
 
 
 
@@ -340,3 +653,4 @@ public boolean search(int[] nums, int target) {
 * [LeetCode-35. 搜索插入位置](https://leetcode-cn.com/problems/search-insert-position/solution/te-bie-hao-yong-de-er-fen-cha-fa-fa-mo-ban-python-/)：这个写的很好:+1:  
 * [旋转数组参考链接](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/solution/er-fen-fa-python-dai-ma-java-dai-ma-by-liweiwei141/)  
 * [旋转数组参考链接2](https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/solution/er-fen-cha-zhao-by-liweiwei1419/)  
+* [LeetCode-300. 最长上升子序列 题解参考链接](https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/)
