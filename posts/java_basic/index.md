@@ -2,8 +2,9 @@
 
   
 * * *
->重新看看Java基础  
->顺便随便记一些基础的东西。。:smiley:
+> 重新看看Java基础  
+> 顺便随便记一些基础的东西。。:smiley:  
+> 记得比较乱  
 * * *
   
 ## 数据类型  
@@ -53,6 +54,22 @@
 | char     | Character |
 | boolean  | Boolean   |
 
+## == 与 equals()  
+* ==：
+    1. 运算符，可以使用在基本数据类型变量和引用类型变量中  
+    2. 如果比较的是基本数据类型的变量，则比较两个变量保存的数是否相等（类型不一定相同）
+    3. 如果比较的是引用数据类型的变量，则比较两个对象的地址是否相等，即两个引用是否指向同一个对象实体  
+* equals():  
+    1. 一个方法，只能适用于引用数据类型
+    2. Object类中equals()的定义：  
+        ```java
+            public boolean equals(Object obj) {
+                return (this == obj);
+            }
+        ```  
+        ps:Object类中定义的equals()和==的作用相同，都是比较两个对象的地址值是否相同，即两个引用是否指向同一对象实体  
+    3. String、Date、FIle、包装类等都重写了Object类中的equals()方法。重写后的equals()方法则是比较两个对象的“实体内容”是否相同  
+
 ## String  
 1. 字符串的构造方法  
     ```java
@@ -99,7 +116,7 @@
       
 3. 字符串常用方法  
 - equals  
-    `public boolean equals(object obj)`：参数可以是任意对象，只有参数为字符串并且内容想到才返回true，否则返回false。
+    `public boolean equals(object obj)`：参数可以是任意对象，只有参数为字符串并且内容相等才返回true，否则返回false。
     ```java
     public class DemoStringEquals {
         public static void main(String[] args) {
@@ -232,38 +249,6 @@
 而第二个方法，它只创建了一个StringBuilder对象。  
     
 
-## switch语句  
-1. 用法：  
-```java
-switch(choice) {
-    case 1:
-        ...
-        break;
-    case 2:
-        ...
-        break;
-    case 3:
-        ...
-        break;
-    default:
-        ...
-        break;
-}
-```  
-2. switch语句将从与选项值匹配的case标签处开始执行，直到碰到break语句，或者一直执行到switch语句的结束处。如果没有匹配的case，并有default语句，就执行default语句  
-> **注意**：如果case结尾没有break，程序会继续执行下一个case分支语句  
-
-3. case的标签可以是：char、byte、short、int的常量表达式，也可以为枚举或者字符串字面量  
-4. switch使用枚举时,不必在每个标签中指明枚举名：  
-```java
-Size sz = ...;
-switch(sz) {
-    case SMALL: // no need to use Size.SMALL
-        ...
-        break;
-    ...
-}
-```  
 
 ## 大数值  
 1. java.math包中的：BigInteger和BigDecimal。这两个类可以处理包含任意长度数字序列的数值，前者实现了任意精度的整数运算，后者则实现了任意精度的浮点数计算。  

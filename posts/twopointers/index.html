@@ -5,32 +5,32 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="robots" content="noodp" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
-        <title>LeetCode面试题62. 圆圈中最后剩下的数字-随笔 - 樂樂阿</title><meta name="Description" content=""><meta property="og:title" content="LeetCode面试题62. 圆圈中最后剩下的数字-随笔" />
-<meta property="og:description" content="题目：0,1,&hellip;,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字" />
+        <title>双指针 - 樂樂阿</title><meta name="Description" content=""><meta property="og:title" content="双指针" />
+<meta property="og:description" content="双指针" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://Leeeee16.github.io/posts/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94/" />
+<meta property="og:url" content="https://Leeeee16.github.io/posts/twopointers/" />
 <meta property="og:image" content="https://Leeeee16.github.io/logo.png"/>
-<meta property="article:published_time" content="2020-03-30T13:04:25+08:00" />
-<meta property="article:modified_time" content="2020-03-30T13:04:25+08:00" /><meta property="og:site_name" content="樂樂阿" />
+<meta property="article:published_time" content="2020-11-08T10:30:38+08:00" />
+<meta property="article:modified_time" content="2020-11-08T00:00:00+00:00" /><meta property="og:site_name" content="樂樂阿" />
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:image" content="https://Leeeee16.github.io/logo.png"/>
 
-<meta name="twitter:title" content="LeetCode面试题62. 圆圈中最后剩下的数字-随笔"/>
-<meta name="twitter:description" content="题目：0,1,&hellip;,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字"/>
+<meta name="twitter:title" content="双指针"/>
+<meta name="twitter:description" content="双指针"/>
 <meta name="application-name" content="樂樂阿">
 <meta name="apple-mobile-web-app-title" content="樂樂阿"><link rel="shortcut icon" type="image/x-icon" href="https://Leeeee16.github.io/favicon.ico" />
         <link rel="icon" type="image/png" sizes="32x32" href="https://Leeeee16.github.io/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="https://Leeeee16.github.io/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="https://Leeeee16.github.io/apple-touch-icon.png"><link rel="manifest" href="https://Leeeee16.github.io/site.webmanifest"><link rel="canonical" href="https://Leeeee16.github.io/posts/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94/" /><link rel="prev" href="https://Leeeee16.github.io/posts/05-%E4%B8%80%E4%BA%9Brequests/" /><link rel="next" href="https://Leeeee16.github.io/posts/06-%E4%B8%80%E4%BA%9B%E6%AD%A3%E5%88%99/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="https://Leeeee16.github.io/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
+        <link rel="icon" type="image/png" sizes="16x16" href="https://Leeeee16.github.io/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="https://Leeeee16.github.io/apple-touch-icon.png"><link rel="manifest" href="https://Leeeee16.github.io/site.webmanifest"><link rel="canonical" href="https://Leeeee16.github.io/posts/twopointers/" /><link rel="prev" href="https://Leeeee16.github.io/posts/binarysearch/" /><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.min.css"><link rel="stylesheet" href="https://Leeeee16.github.io/css/style.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.13.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.7.2/animate.min.css"><script type="application/ld+json">
     {
         "@context": "http://schema.org",
         "@type": "BlogPosting",
-        "headline": "LeetCode面试题62. 圆圈中最后剩下的数字-随笔",
+        "headline": "双指针",
         "inLanguage": "zh-CN",
         "mainEntityOfPage": {
             "@type": "WebPage",
-            "@id": "https:\/\/Leeeee16.github.io\/posts\/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94\/"
-        },"image": ["https:\/\/Leeeee16.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "LeetCode, 算法","wordcount":  903 ,
-        "url": "https:\/\/Leeeee16.github.io\/posts\/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94\/","datePublished": "2020-03-30T13:04:25+08:00","dateModified": "2020-03-30T13:04:25+08:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
+            "@id": "https:\/\/Leeeee16.github.io\/posts\/twopointers\/"
+        },"image": ["https:\/\/Leeeee16.github.io\/images\/Apple-Devices-Preview.png"],"genre": "posts","keywords": "算法, 双指针","wordcount":  521 ,
+        "url": "https:\/\/Leeeee16.github.io\/posts\/twopointers\/","datePublished": "2020-11-08T10:30:38+08:00","dateModified": "2020-11-08T00:00:00+00:00","license": "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.","publisher": {
             "@type": "Organization",
             "name": "xxxx","logo": "https:\/\/Leeeee16.github.io\/images\/avatar.png"},"author": {
                 "@type": "Person",
@@ -104,10 +104,10 @@
                 <div class="container"><div class="toc" id="toc-auto">
             <h2 class="toc-title">目录</h2>
             <div class="toc-content" id="toc-content-auto"></div>
-        </div><article class="page single"><h1 class="single-title animated flipInX">LeetCode面试题62. 圆圈中最后剩下的数字-随笔</h1><div class="post-meta">
-            <div class="post-meta-line"><span class="post-author"><a href="https://Leeeee16.github.io/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>lele</a></span>&nbsp;<span class="post-category">收录于 <a href="https://Leeeee16.github.io/categories/leetcode/"><i class="far fa-folder fa-fw"></i>LeetCode</a></span></div>
-            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-03-30">2020-03-30</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 903 字&nbsp;
-                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;<span id="/posts/leetcode%E9%9D%A2%E8%AF%95%E9%A2%9862.-%E5%9C%86%E5%9C%88%E4%B8%AD%E6%9C%80%E5%90%8E%E5%89%A9%E4%B8%8B%E7%9A%84%E6%95%B0%E5%AD%97-%E9%9A%8F%E7%AC%94/" class="leancloud_visitors" data-flag-title="LeetCode面试题62. 圆圈中最后剩下的数字-随笔">
+        </div><article class="page single"><h1 class="single-title animated flipInX">双指针</h1><div class="post-meta">
+            <div class="post-meta-line"><span class="post-author"><a href="https://Leeeee16.github.io/" title="Author" rel=" author" class="author"><i class="fas fa-user-circle fa-fw"></i>lele</a></span>&nbsp;<span class="post-category">收录于 <a href="https://Leeeee16.github.io/categories/%E7%AE%97%E6%B3%95/"><i class="far fa-folder fa-fw"></i>算法</a></span></div>
+            <div class="post-meta-line"><i class="far fa-calendar-alt fa-fw"></i>&nbsp;<time datetime="2020-11-08">2020-11-08</time>&nbsp;<i class="fas fa-pencil-alt fa-fw"></i>&nbsp;约 521 字&nbsp;
+                <i class="far fa-clock fa-fw"></i>&nbsp;预计阅读 2 分钟&nbsp;<span id="/posts/twopointers/" class="leancloud_visitors" data-flag-title="双指针">
                         <i class="far fa-eye fa-fw"></i>&nbsp;<span class=leancloud-visitors-count></span>&nbsp;次阅读
                     </span>&nbsp;</div>
         </div><div class="details toc" id="toc-static"  kept="">
@@ -115,40 +115,16 @@
                     <span>目录</span>
                     <span><i class="details-icon fas fa-angle-right"></i></span>
                 </div>
-                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents"></nav></div>
-            </div><div class="content" id="content"><p>题目：0,1,&hellip;,n-1这n个数字排成一个圆圈，从数字0开始，每次从这个圆圈里删除第m个数字。求出这个圆圈里剩下的最后一个数字。<br>
-<a href="https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/" target="_blank" rel="noopener noreffer">LeetCode面试题62. 圆圈中最后剩下的数字</a>
-<div class="details admonition example open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-list-ol fa-fw"></i>示例：<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><ul>
-<li>示例 1：<br>
-输入：n=5,m=3<br>
-输出：3</li>
-<li>示例 2：<br>
-输入：n=10,m=17<br>
-输出：2</li>
-</ul>
-</div>
-        </div>
-    </div>
-<div class="details admonition tip open">
-        <div class="details-summary admonition-title">
-            <i class="icon fas fa-lightbulb fa-fw"></i>限制<i class="details-icon fas fa-angle-right fa-fw"></i>
-        </div>
-        <div class="details-content">
-            <div class="admonition-content"><ul>
-<li>1 &lt;= n &lt;= 10^5</li>
-<li>1 &lt;= m &lt;= 10^6</li>
-</ul>
-</div>
-        </div>
-    </div></p>
-<hr>
-<p>思路1：模拟链表<br>
-时间复杂度为O(n*m)，由于题目m和n的限制，用模拟链表会导致超时orz&hellip;</p>
+                <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#leetcode-141-环形链表">LeetCode-141. 环形链表</a></li>
+    <li><a href="#leetcode-142-环形链表-ii">LeetCode-142. 环形链表 II</a></li>
+  </ul>
+</nav></div>
+            </div><div class="content" id="content"><p>双指针</p>
+<h2 id="leetcode-141-环形链表">LeetCode-141. 环形链表</h2>
+<p><a href="https://leetcode-cn.com/problems/linked-list-cycle/" target="_blank" rel="noopener noreffer">141. 环形链表</a><br>
+给定一个链表，判断链表中是否有环。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt"> 1
@@ -169,68 +145,140 @@
 </span><span class="lnt">16
 </span><span class="lnt">17
 </span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">int</span> <span class="n">lastRemaining</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">num</span><span class="p">;</span>
-        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">){</span>
-            <span class="n">num</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">i</span><span class="p">);</span>
-        <span class="p">}</span>
-        <span class="kt">int</span> <span class="n">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="k">while</span><span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">){</span>
-            <span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">idx</span> <span class="o">+</span> <span class="n">m</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span><span class="p">;</span>
-            <span class="k">auto</span> <span class="n">it</span> <span class="o">=</span> <span class="n">num</span><span class="p">.</span><span class="n">begin</span><span class="p">();</span>
-            <span class="n">advance</span><span class="p">(</span><span class="n">it</span><span class="p">,</span> <span class="n">idx</span><span class="p">);</span>
-            <span class="n">num</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">it</span><span class="p">);</span>
-            <span class="n">n</span><span class="o">--</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="k">return</span> <span class="n">num</span><span class="p">.</span><span class="n">front</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">};</span>
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="cm">/**
+</span><span class="cm">    * Definition for singly-linked list.
+</span><span class="cm">    * class ListNode {
+</span><span class="cm">    *     int val;
+</span><span class="cm">    *     ListNode next;
+</span><span class="cm">    *     ListNode(int x) {
+</span><span class="cm">    *         val = x;
+</span><span class="cm">    *         next = null;
+</span><span class="cm">    *     }
+</span><span class="cm">    * }
+</span><span class="cm">    */</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">hasCycle</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="n">ListNode</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+            <span class="n">ListNode</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+            <span class="k">while</span><span class="o">(</span><span class="n">fast</span> <span class="o">!=</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+                <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">fast</span> <span class="o">==</span> <span class="n">slow</span><span class="o">)</span> <span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><hr>
-<p>思路2：约瑟夫环-公式法<br>
-递推公式：f(N,M)=(f(N−1,M)+M)%N<br>
-f(N,M)表示：N个数，每次向后数M个并删除，最终剩下的那个数的序号。<br>
-以<em>示例一</em>为例，N = 5，M = 3。第一轮后删去2，下一轮从3开始，也就相当于后面数字的序号都向前移动了3位，那么最终剩下的那个数的序号也向前移动了3位。 <br>
-到一般情况，我们每一轮删去一个数，下一个数成为头，也就相当于把数组向前移动M位。如果我们已知 N-1 个人时，最后剩下的数的序号为f(N-1,M),那么N个人时，数组就向后移动M位，那么最终剩下的数的序号就是f(N-1,M)+M , 为了防止数组越界，则为f(N,M)=(f(N-1,M)+M)%N</p>
-<hr>
-<p>当只有一个数时，最终剩下的数的序号就是0，因此f(1,M) = 0。我们可以从2个数开始，每次增加一个数。而每加一个数，最终剩下的那个数的序号就增加 M 。</p>
+</div><h2 id="leetcode-142-环形链表-ii">LeetCode-142. 环形链表 II</h2>
+<p><a href="https://leetcode-cn.com/problems/linked-list-cycle-ii/" target="_blank" rel="noopener noreffer">142. 环形链表 II</a><br>
+给定一个链表，返回链表开始入环的第一个节点。 如果链表无环，则返回 null。</p>
+<blockquote>
+<p>思路：假设到环入口的步数为a, 环内的步数为b<br>
+走到环入口的步数为：a + nb 步<br>
+假设慢指针走s步，快指针走f步，那么f = 2s<br>
+快指针比慢指针多走了n个环的长度，f = s + nb<br>
+两式相减，得到s = nb，也就是第一次相遇时，慢指针已经走了nb步 <br>
+第一次相遇后，slow慢指针位置不变，将快指针指向链表头结点，两个指针每轮向前走一步，那么两个指针相遇时，分别走了a 和 a + nb步，也就是在环入口相遇</p>
+</blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-cpp" data-lang="cpp"><span class="k">class</span> <span class="nc">Solution</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">int</span> <span class="n">lastRemaining</span><span class="p">(</span><span class="kt">int</span> <span class="n">n</span><span class="p">,</span> <span class="kt">int</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">int</span> <span class="n">f</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span>
-            <span class="n">f</span> <span class="o">=</span> <span class="p">(</span><span class="n">m</span> <span class="o">+</span> <span class="n">f</span><span class="p">)</span> <span class="o">%</span> <span class="n">i</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">f</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
+<pre class="chroma"><code class="language-java" data-lang="java">    <span class="cm">/**
+</span><span class="cm">    * Definition for singly-linked list.
+</span><span class="cm">    * class ListNode {
+</span><span class="cm">    *     int val;
+</span><span class="cm">    *     ListNode next;
+</span><span class="cm">    *     ListNode(int x) {
+</span><span class="cm">    *         val = x;
+</span><span class="cm">    *         next = null;
+</span><span class="cm">    *     }
+</span><span class="cm">    * }
+</span><span class="cm">    */</span>
+    <span class="kd">public</span> <span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+        <span class="kd">public</span> <span class="n">ListNode</span> <span class="nf">detectCycle</span><span class="o">(</span><span class="n">ListNode</span> <span class="n">head</span><span class="o">)</span> <span class="o">{</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">head</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">head</span><span class="o">.</span><span class="na">next</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="o">}</span>
+            <span class="n">ListNode</span> <span class="n">slow</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+            <span class="n">ListNode</span> <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+            <span class="kt">boolean</span> <span class="n">isCycle</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+            <span class="k">while</span><span class="o">(</span><span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">!=</span><span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">.</span><span class="na">next</span><span class="o">!=</span><span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+                <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+                <span class="k">if</span><span class="o">(</span><span class="n">slow</span> <span class="o">==</span> <span class="n">fast</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">isCycle</span> <span class="o">=</span> <span class="kc">true</span><span class="o">;</span>
+                    <span class="k">break</span><span class="o">;</span>
+                <span class="o">}</span>
+            <span class="o">}</span>
+            <span class="k">if</span><span class="o">(</span><span class="n">isCycle</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">fast</span> <span class="o">=</span> <span class="n">head</span><span class="o">;</span>
+                <span class="k">while</span><span class="o">(</span><span class="n">slow</span> <span class="o">!=</span> <span class="n">fast</span><span class="o">)</span> <span class="o">{</span>
+                    <span class="n">slow</span> <span class="o">=</span> <span class="n">slow</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+                    <span class="n">fast</span> <span class="o">=</span> <span class="n">fast</span><span class="o">.</span><span class="na">next</span><span class="o">;</span>
+                <span class="o">}</span>
+                <span class="k">return</span> <span class="n">slow</span><span class="o">;</span>
+            <span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+                <span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
 </code></pre></td></tr></table>
 </div>
-</div><hr>
-<p>一个讲解很详细的帖子：<a href="https://blog.csdn.net/u011500062/article/details/72855826" target="_blank" rel="noopener noreffer">https://blog.csdn.net/u011500062/article/details/72855826</a><br>
-LeetCode官方题解：<a href="https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-by-lee/" target="_blank" rel="noopener noreffer">https://leetcode-cn.com/problems/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-lcof/solution/yuan-quan-zhong-zui-hou-sheng-xia-de-shu-zi-by-lee/</a></p>
-</div><div class="post-footer" id="post-footer">
+</div></div><div class="post-footer" id="post-footer">
     <div class="post-info">
         <div class="post-info-line">
             <div class="post-info-mod">
-                <span>更新于 2020-03-30</span>
+                <span>更新于 2020-11-08</span>
             </div>
             <div class="post-info-license"></div>
         </div>
@@ -243,14 +291,13 @@ LeetCode官方题解：<a href="https://leetcode-cn.com/problems/yuan-quan-zhong
     </div>
 
     <div class="post-info-more">
-        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="https://Leeeee16.github.io/tags/leetcode/">LeetCode</a>,&nbsp;<a href="https://Leeeee16.github.io/tags/%E7%AE%97%E6%B3%95/">算法</a></section>
+        <section class="post-tags"><i class="fas fa-tags fa-fw"></i>&nbsp;<a href="https://Leeeee16.github.io/tags/%E7%AE%97%E6%B3%95/">算法</a>,&nbsp;<a href="https://Leeeee16.github.io/tags/%E5%8F%8C%E6%8C%87%E9%92%88/">双指针</a></section>
         <section>
             <span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="https://Leeeee16.github.io/">主页</a></span>
         </section>
     </div>
 
-    <div class="post-nav"><a href="https://Leeeee16.github.io/posts/05-%E4%B8%80%E4%BA%9Brequests/" class="prev" rel="prev" title="一些Requests"><i class="fas fa-angle-left fa-fw"></i>一些Requests</a>
-            <a href="https://Leeeee16.github.io/posts/06-%E4%B8%80%E4%BA%9B%E6%AD%A3%E5%88%99/" class="next" rel="next" title="一些正则">一些正则<i class="fas fa-angle-right fa-fw"></i></a></div>
+    <div class="post-nav"><a href="https://Leeeee16.github.io/posts/binarysearch/" class="prev" rel="prev" title="二分查找"><i class="fas fa-angle-left fa-fw"></i>二分查找</a></div>
 </div>
 <div id="comments"><div id="valine" class="comment"></div><noscript>
                 Please enable JavaScript to view the comments powered by <a href="https://valine.js.org/">Valine</a>.

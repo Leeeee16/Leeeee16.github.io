@@ -640,9 +640,271 @@ public int helper(int[] arr, int value, int target) {
 }
 ```  
 
+## LeetCode-410. 分割数组的最大值  
+[410. 分割数组的最大值](https://leetcode-cn.com/problems/split-array-largest-sum/)  
+给定一个非负整数数组和一个整数 m，你需要将这个数组分成 m 个非空的连续子数组。设计一个算法使得这 m 个子数组各自和的最大值最小。  
+注意:  
+数组长度 n 满足以下条件:  
+1 ≤ n ≤ 1000  
+1 ≤ m ≤ min(50, n)  
+> 这道题的思路关键点：  
+> 设：maxIntervalSum表示 连续子数组各自和的最大值  
+> 那么 maxIntervalSum越大，说明分的组数 M 就越少  
+> 反之，如果maxIntervalSum越小，说明分的组数 M 就越大  
+> 因此 组数 和 连续子数组各自和的最大值 是一个单调递减的函数  
+> 因此可以采用二分查找  
+
+```java
+public int splitArray(int[] nums, int m) {
+    int max = 0;
+    int sum = 0;
+
+    // 计算 子数组各自的和的最大值 的上下界
+    // 最大就是数组所有元素的和(即m=1)，最小为 数组最大的元素值
+    for (int num : nums) {
+        max = Math.max(max, num);
+        sum += num;
+    }
+
+    // 使用二分查找，确定一个恰当的 子数组各自的和的最大值
+    // 使得它对应的 子数组的分割数 恰好等于 m
+    int left = max, right = sum;
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        int splits = split(nums, mid);
+        if (splits > m) {
+            // 如果分割数太多，说明 子数组各自的和的最大值 太小，此时需要 增大 子数组各自的和的最大值
+            // 下一轮搜索区间 [mid + 1, right]
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+    return left;
+}
+
+/**
+    * @param nums           原始数组
+    * @param maxIntervalSum 子数组各自的和的最大值
+    * @return 满足不超过 子数组各自的最大值 的分割数
+    */
+private int split(int[] nums, int maxIntervalSum) {
+    // 至少是一个分割
+    int splits = 1;
+    // 当前区间的和
+    int curIntervalSum = 0;
+    for (int num : nums) {
+        // 尝试加上当前遍历的这个数，如果加上后超过了 子数组各自的和的最大值，就不加这个数
+        if (curIntervalSum + num > maxIntervalSum) {
+            curIntervalSum = 0;
+            splits++;
+        }
+        curIntervalSum += num;
+    }
+    return splits;
+}
+```
+  
+## LeetCode-875. 爱吃香蕉的珂珂  
+[875. 爱吃香蕉的珂珂](https://leetcode-cn.com/problems/koko-eating-bananas/)  
+珂珂喜欢吃香蕉。这里有 N 堆香蕉，第 i 堆中有 piles[i] 根香蕉。警卫已经离开了，将在 H 小时后回来。  
+珂珂可以决定她吃香蕉的速度 K （单位：根/小时）。每个小时，她将会选择一堆香蕉，从中吃掉 K 根。如果这堆香蕉少于 K 根，她将吃掉这堆的所有香蕉，然后这一小时内不会再吃更多的香蕉。  
+珂珂喜欢慢慢吃，但仍然想在警卫回来前吃掉所有的香蕉。  
+返回她可以在 H 小时内吃掉所有香蕉的最小速度 K（K 为整数）。  
+> 思路和上一题几乎一样~  
+> 每小时吃的越多，小时数就越少
+> 利用这个单调减函数，进行二分
+
+```java
+public int minEatingSpeed(int[] piles, int H) {
+    int max = 0; // 记录最大元素
+    // K 的取值：最小 = 1， 最大 = 最大元素
+    // h 的取值：最大 = 元素和， 最小 = 元素个数
+    for(int num : piles) {
+        max = Math.max(max, num);
+    }
+    // 每小时吃的越多，小时数就越少
+    // 二分，确定一个恰当的k，使得小时数刚好为 H
+    int left = 1, right = max;
+    while(left < right) {
+        int mid = left + (right - left) / 2;
+        int h = helper(piles, mid);
+        if(h > H) {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+    return right;
+
+}
+
+/**
+* @param piles 原数组
+* @param k 当前每小时吃的个数
+* @return  返回需要的小时数
+*/
+public int helper(int[] piles, int k) {
+    int h = 0;
+    for(int num : piles) {
+        // 向上取整
+        // h += num % k == 0? num / k : num / k + 1;
+        h += (num + k - 1) / k;
+    }
+    return h;
+}
+```  
+
+## LeetCode-162. 寻找峰值  
+[162. 寻找峰值](https://leetcode-cn.com/problems/find-peak-element/)  
+峰值元素是指其值大于左右相邻值的元素。  
+给定一个输入数组 nums，其中 nums[i] ≠ nums[i+1]，找到峰值元素并返回其索引。  
+数组可能包含多个峰值，在这种情况下，返回任何一个峰值所在位置即可。  
+你可以假设 nums[-1] = nums[n] = -∞。  
+
+```java
+public int findPeakElement(int[] nums) {
+    int left = 0, right = nums.length - 1;
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (nums[mid] < nums[mid + 1]) {
+            left = mid + 1;
+        } else {
+            right = mid;
+        }
+    }
+    return left;
+}
+```  
+
+## LeetCode-240. 搜索二维矩阵 II  
+[LeetCode-240. 搜索二维矩阵 II ](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/)  
+编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target。该矩阵具有以下特性：  
+**每行的元素从左到右升序排列。**  
+**每列的元素从上到下升序排列。**  
+  
+1. 方法一：  
+   逐行遍历，每行采用二分查找  
+   是我首先想到的解法，只用到了行有序，列有序没想到怎么用orz...  
+   时间复杂度：O(m*lgn)  
+```java
+    public boolean searchMatrix(int[][] matrix, int target) {
+            int m = matrix.length;
+            if (m == 0) {
+                return false;
+            }
+            int n = matrix[0].length;
+            if (n == 0) {
+                return false;
+            }
+            for (int i = 0; i < m; i++) {
+                if (matrix[i][n - 1] < target) {
+                    continue;
+                }
+                boolean res = bsearch(matrix[i], target);
+                if (res) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+    public boolean bsearch(int[] nums, int target) {
+        int left = 0, right = nums.length - 1;
+        while (left < right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid;
+            }
+        }
+        return nums[left] == target;
+    }
+```  
+
+2. 方法二：  
+   迭代遍历矩阵对角线，从当前元素对行和列搜索  
+   时间复杂度：O(lg(n!))O(lg(n!)),推导可见[官方题解](https://leetcode-cn.com/problems/search-a-2d-matrix-ii/solution/sou-suo-er-wei-ju-zhen-ii-by-leetcode-2/)  
+
+```java
+    public boolean searchMartrix_2(int[][] matrix, int target) {
+        if (matrix == null || matrix.length == 0) {
+            return false;
+        }
+        // 遍历矩阵对角线
+        int shorterDim = Math.min(matrix.length, matrix[0].length);
+        for (int i = 0; i < shorterDim; i++) {
+            boolean verticalFound = bsearch_2(matrix, target, i, true);
+            boolean horizontalFound = bsearch_2(matrix, target, i, false);
+            if (verticalFound || horizontalFound) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+    * @param martrix  原始数组
+    * @param target   目标值
+    * @param start    开始搜索的下标
+    * @param vertical 判断是行搜索还是列搜索
+    * @return
+    */
+    public boolean bsearch_2(int[][] martrix, int target, int start, boolean vertical) {
+        int lo = start;
+        int hi = vertical ? martrix[0].length - 1 : martrix.length - 1;
+        while (lo < hi) {
+            int mid = lo + (hi - lo) / 2;
+            if (vertical) {  // 搜索行
+                if (martrix[start][mid] < target) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid;
+                }
+            } else {    // 搜索列
+                if (martrix[mid][start] < target) {
+                    lo = mid + 1;
+                } else {
+                    hi = mid;
+                }
+            }
+        }
+        if (vertical) {
+            return martrix[start][lo] == target;
+        } else {
+            return martrix[lo][start] == target;
+        }
+    }
+```  
+
+3. 方法三(tql)：  
+由题目条件可知，**每行的元素从左到右升序排列。**，**每列的元素从上到下升序排列。**因此我们可以在搜索过程中修剪O(m)或者O(n)。  
+* 首先初始化一个指向矩阵左下角的(row, col)指针。  
+* 直到找到目标并返回true,或者指针移动到矩阵维度之外，我们执行以下操作做：  
+   如果当前值大于目标值，则向上移动一行，即`row--`；如果当前值小于目标值，则向右移动一列，即`col++`。  
+* 这个二维矩阵，对于每个数来说，上面的数都小于它，右边的数都大于它，因此可以在搜索的时候进行修剪。  
+* 时间复杂度为：O(m + n)  
+
+```java
+    public boolean searchMatrix_3(int[][] matrix, int target) {
+        // 从矩阵左下角开始搜索
+        int row = matrix.length - 1;
+        int col = 0;
+        while (row >= 0 && col < matrix[0].length) {
+            if (matrix[row][col] > target) {
+                row--;
+            } else if (matrix[row][col] < target) {
+                col++;
+            } else {
+                return true;
+            }
+        }
+        return false;
+    }
+```  
+
 ## 
-
-
 
 
 
@@ -653,4 +915,5 @@ public int helper(int[] arr, int value, int target) {
 * [LeetCode-35. 搜索插入位置](https://leetcode-cn.com/problems/search-insert-position/solution/te-bie-hao-yong-de-er-fen-cha-fa-fa-mo-ban-python-/)：这个写的很好:+1:  
 * [旋转数组参考链接](https://leetcode-cn.com/problems/search-in-rotated-sorted-array/solution/er-fen-fa-python-dai-ma-java-dai-ma-by-liweiwei141/)  
 * [旋转数组参考链接2](https://leetcode-cn.com/problems/search-in-rotated-sorted-array-ii/solution/er-fen-cha-zhao-by-liweiwei1419/)  
-* [LeetCode-300. 最长上升子序列 题解参考链接](https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/)
+* [LeetCode-300. 最长上升子序列 题解参考链接](https://leetcode-cn.com/problems/longest-increasing-subsequence/solution/dong-tai-gui-hua-er-fen-cha-zhao-tan-xin-suan-fa-p/)  
+* [LeetCode-410. 分割数组的最大值 题解参考](https://leetcode-cn.com/problems/split-array-largest-sum/solution/er-fen-cha-zhao-by-liweiwei1419-4/)
