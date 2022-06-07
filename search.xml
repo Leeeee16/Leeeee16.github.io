@@ -4,6 +4,64 @@
   
     
     <entry>
+      <title>剑指Offer16-数值的整数次方</title>
+      <link href="/2022/06/07/%E5%89%91%E6%8C%87Offer16-%E6%95%B0%E5%80%BC%E7%9A%84%E6%95%B4%E6%95%B0%E6%AC%A1%E6%96%B9/"/>
+      <url>/2022/06/07/%E5%89%91%E6%8C%87Offer16-%E6%95%B0%E5%80%BC%E7%9A%84%E6%95%B4%E6%95%B0%E6%AC%A1%E6%96%B9/</url>
+      
+        <content type="html"><![CDATA[<h4 id="剑指-Offer-16-数值的整数次方"><a href="https://leetcode.cn/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/">剑指 Offer 16. 数值的整数次方</a></h4><p>实现 <a href="https://www.cplusplus.com/reference/valarray/pow/">pow(<em>x</em>, <em>n</em>)</a> ，即计算 x 的 n 次幂函数（即，xn）。不得使用库函数，同时不需要考虑大数问题。</p><p><strong>示例 1：</strong><br>输入：x = 2.00000, n = 10<br>输出：1024.00000</p><hr><p>思路参考题解：<a href="https://leetcode.cn/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/solution/mian-shi-ti-16-shu-zhi-de-zheng-shu-ci-fang-kuai-s/">https://leetcode.cn/problems/shu-zhi-de-zheng-shu-ci-fang-lcof/solution/mian-shi-ti-16-shu-zhi-de-zheng-shu-ci-fang-kuai-s/</a></p><p>思路是使用快速幂。简单来说就是将指数改写为二进制。然后通过循环复制<code>x *= x</code>，在指数二进制为1的位置，将结果乘上x即<code>res *= x</code>。详细的描述可以看参考题解。</p><p>对于指数为负数的处理，如果指数为负数，<code>x = 1 / x</code>并将指数再设置为正数即可。比如<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><msup><mn>2</mn><mrow><mo>−</mo><mn>1</mn></mrow></msup></mrow><annotation encoding="application/x-tex">2^{-1}</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">−</span><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></span>可以转化为<span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false">(</mo><mfrac><mn>1</mn><mn>2</mn></mfrac><msup><mo stretchy="false">)</mo><mn>1</mn></msup></mrow><annotation encoding="application/x-tex">(\frac12)^1</annotation></semantics></math></span><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:1.1901em;vertical-align:-0.345em;"></span><span class="mopen">(</span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8451em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">2</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span><span class="mclose"><span class="mclose">)</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">1</span></span></span></span></span></span></span></span></span></span></span></p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">double</span> <span class="title function_">myPow</span><span class="params">(<span class="type">double</span> x, <span class="type">int</span> n)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (x == <span class="number">0</span> || x == <span class="number">1</span>) <span class="keyword">return</span> x;</span><br><span class="line">        <span class="type">long</span> <span class="variable">nn</span> <span class="operator">=</span> n;</span><br><span class="line">        <span class="keyword">if</span> (n &lt; <span class="number">0</span>) &#123;</span><br><span class="line">            x = <span class="number">1</span> / x;</span><br><span class="line">            nn = -nn;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">double</span> <span class="variable">res</span> <span class="operator">=</span> <span class="number">1.0</span>;</span><br><span class="line">        <span class="keyword">while</span> (nn &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> ((nn &amp; <span class="number">1</span>) == <span class="number">1</span>) &#123;</span><br><span class="line">                res *= x;</span><br><span class="line">            &#125;</span><br><span class="line">            x *= x;</span><br><span class="line">            nn &gt;&gt;= <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> LeetCode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> 数学 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>LeetCode236-二叉树的最近公共祖先</title>
+      <link href="/2022/06/06/LeetCode236-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/"/>
+      <url>/2022/06/06/LeetCode236-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9A%84%E6%9C%80%E8%BF%91%E5%85%AC%E5%85%B1%E7%A5%96%E5%85%88/</url>
+      
+        <content type="html"><![CDATA[<h4 id="236-二叉树的最近公共祖先"><a href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/">236. 二叉树的最近公共祖先</a></h4><p>给定一个二叉树, 找到该树中两个指定节点的最近公共祖先。</p><p>百度百科中最近公共祖先的定义为：“对于有根树 T 的两个节点 p、q，最近公共祖先表示为一个节点 x，满足 x 是 p、q 的祖先且 x 的深度尽可能大（一个节点也可以是它自己的祖先）。”</p><p><strong>示例 1：</strong></p><p><img src="https://lqy-blog-pic.oss-cn-shanghai.aliyuncs.com/blogImg/LeetCode236-binarytree.png" alt=""></p><p>输入：root = [3,5,1,6,2,0,8,null,null,7,4], p = 5, q = 1<br>输出：3<br>解释：节点 5 和节点 1 的最近公共祖先是节点 3 。</p><hr><p>思路：如果root为p和q的最近公共祖先，则一共有三种情况：</p><ol><li><code>p</code>和<code>q</code>在<code>root</code>的两侧</li><li><code>p = root</code>，且<code>q</code>在<code>root</code>的左子树或者右子树中；</li><li><code>q = root</code>，且<code>p</code>在<code>root</code>的左子树或者右子树中；</li></ol><p>考虑使用先序遍历，遇到p或者q时返回。从下往上回溯，当p和q在root异侧时，返回root。</p><p>详见代码：</p><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="comment"> * public class TreeNode &#123;</span></span><br><span class="line"><span class="comment"> *     int val;</span></span><br><span class="line"><span class="comment"> *     TreeNode left;</span></span><br><span class="line"><span class="comment"> *     TreeNode right;</span></span><br><span class="line"><span class="comment"> *     TreeNode(int x) &#123; val = x; &#125;</span></span><br><span class="line"><span class="comment"> * &#125;</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Solution</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> TreeNode <span class="title function_">lowestCommonAncestor</span><span class="params">(TreeNode root, TreeNode p, TreeNode q)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (root == <span class="literal">null</span> || root == p || root == q) &#123;</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">left</span> <span class="operator">=</span> lowestCommonAncestor(root.left, p, q);</span><br><span class="line">        <span class="type">TreeNode</span> <span class="variable">right</span> <span class="operator">=</span> lowestCommonAncestor(root.right, p, q);</span><br><span class="line">        <span class="comment">// p和q在root两侧，则最近公共祖先为root</span></span><br><span class="line">        <span class="keyword">if</span> (left != <span class="literal">null</span> &amp;&amp; right != <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> root;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">// p和q在root右子树，则最近公共祖先为right</span></span><br><span class="line">        <span class="keyword">if</span> (left == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> right;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> left;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>参考题解：<a href="https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/">https://leetcode.cn/problems/lowest-common-ancestor-of-a-binary-tree/solution/236-er-cha-shu-de-zui-jin-gong-gong-zu-xian-hou-xu/</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> LeetCode </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> LeetCode </tag>
+            
+            <tag> 二叉树 </tag>
+            
+            <tag> 剑指Offer </tag>
+            
+            <tag> 递归 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>剑指Offer54-二叉搜索树的第k大节点</title>
       <link href="/2022/06/04/%E5%89%91%E6%8C%87Offer54-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E7%AC%ACk%E5%A4%A7%E8%8A%82%E7%82%B9/"/>
       <url>/2022/06/04/%E5%89%91%E6%8C%87Offer54-%E4%BA%8C%E5%8F%89%E6%90%9C%E7%B4%A2%E6%A0%91%E7%9A%84%E7%AC%ACk%E5%A4%A7%E8%8A%82%E7%82%B9/</url>
